@@ -1,0 +1,103 @@
+@import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Raleway:wght@300;400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  *, *::before, *::after { box-sizing: border-box; }
+
+  html {
+    scroll-behavior: smooth;
+    font-size: 18px;
+  }
+
+  body {
+    font-family: 'Raleway', system-ui, sans-serif;
+    background-color: #FDF8F0;
+    color: #2C3A2C;
+    line-height: 1.75;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Lora', Georgia, serif;
+    color: #2C3A2C;
+    line-height: 1.25;
+  }
+
+  ::selection {
+    background: #D4E4D5;
+    color: #2C3A2C;
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2 rounded-2xl bg-sage font-sans font-semibold text-white px-8 py-4 text-lg shadow-cta transition-all duration-200 hover:bg-sage-700 hover:shadow-lg active:scale-[0.98] cursor-pointer;
+  }
+
+  .btn-secondary {
+    @apply inline-flex items-center justify-center gap-2 rounded-2xl border-2 border-sage font-sans font-semibold text-sage px-8 py-4 text-lg transition-all duration-200 hover:bg-sage hover:text-white cursor-pointer;
+  }
+
+  .section-pad {
+    @apply py-16 md:py-24 px-5 md:px-8;
+  }
+
+  .container-md {
+    @apply max-w-3xl mx-auto;
+  }
+
+  .container-lg {
+    @apply max-w-5xl mx-auto;
+  }
+
+  .card {
+    @apply bg-white rounded-2xl shadow-card p-8 border border-cream-300;
+  }
+
+  .section-label {
+    @apply inline-block text-sage-600 font-sans font-semibold text-sm tracking-widest uppercase mb-4;
+  }
+}
+
+@layer utilities {
+  .text-balance { text-wrap: balance; }
+  .gradient-hero { background: linear-gradient(160deg, #FDF8F0 0%, #EEF4EE 60%, #FDF8F0 100%); }
+  .gradient-sage-soft { background: linear-gradient(135deg, #EEF4EE 0%, #D4E4D5 100%); }
+  .gradient-amber-soft { background: linear-gradient(135deg, #FEF7EC 0%, #FAEBD0 100%); }
+  .divider { @apply w-16 h-1 bg-amber rounded-full; }
+}
+
+/* ─── Chatbot markdown styles — scoped to .chatbot-md (assistant bubbles only) ─── */
+.chatbot-md > * + * { margin-top: 0.4rem; }
+.chatbot-md p { margin: 0; line-height: 1.55; }
+.chatbot-md strong { font-weight: 700; color: #3D5C3F; }
+.chatbot-md em { font-style: italic; }
+.chatbot-md ul, .chatbot-md ol { padding-left: 1.1rem; margin: 0.25rem 0; }
+.chatbot-md ul { list-style: disc; }
+.chatbot-md ol { list-style: decimal; }
+.chatbot-md li { margin: 0.15rem 0; }
+.chatbot-md li > p { display: inline; }
+.chatbot-md h1, .chatbot-md h2, .chatbot-md h3, .chatbot-md h4 {
+  font-weight: 700;
+  color: #3D5C3F;
+  margin: 0.3rem 0 0.15rem;
+  line-height: 1.25;
+  font-size: 0.9rem;
+}
+.chatbot-md code {
+  font-size: 0.8rem;
+  background: rgba(90,122,92,0.1);
+  color: #3D5C3F;
+  padding: 1px 5px;
+  border-radius: 4px;
+}
+.chatbot-md a { color: #5A7A5C; text-decoration: underline; }
+.chatbot-md blockquote {
+  border-left: 3px solid #A9C9AB;
+  padding-left: 0.7rem;
+  color: #6B7B6B;
+  font-style: italic;
+}
