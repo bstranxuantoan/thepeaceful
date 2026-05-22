@@ -1,83 +1,128 @@
 'use client'
 import { useState } from 'react'
+import { useRouter } from 'next/navigation'
 
-export default function LeadForm({ tier }: { tier: string }) {
+const TIER_MAPPING: Record<string, { productName: string; amount: number; priceLabel: string; label: string }> = {
+  basic: {
+    productName: 'The Peaceful Mind Method - Book Only',
+    amount: 99000,
+    priceLabel: '99.000đ',
+    label: 'Gói Sách Đọc (Book Only) — 99.000đ',
+  },
+  standard: {
+    productName: 'The Peaceful Mind Method - Full Bundle',
+    amount: 149700,
+    priceLabel: '149.700đ',
+    label: 'Gói Đầy Đủ (Full Bundle) — 149.700đ',
+  },
+  premium: {
+    productName: 'The Peaceful Mind Method - Premium + Support',
+    amount: 370000,
+    priceLabel: '370.000đ',
+    label: 'Gói Cao Cấp (Premium + Support) — 370.000đ',
+  },
+}
+
+export default function LeadForm({ tier: initialTier }: { tier: string }) {
+  const [selectedTier, setSelectedTier] = useState<string>(initialTier || 'standard')
   const [form, setForm] = useState({ name: '', email: '', phone: '' })
   const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle')
+  const router = useRouter()
+
+  const tierInfo = TIER_MAPPING[selectedTier] || TIER_MAPPING.standard
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setStatus('loading')
     try {
-      const res = await fetch('/api/lead', {
+      const res = await fetch('/api/checkout', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ ...form, tier }),
+        body: JSON.stringify({
+          name: form.name,
+          email: form.email,
+          phone: form.phone,
+          productName: tierInfo.productName,
+          amount: tierInfo.amount,
+        }),
       })
-      if (res.ok) setStatus('success')
-      else setStatus('error')
+
+      if (res.ok) {
+        const data = await res.json()
+        setStatus('success')
+        router.push(`/checkout/${data.orderId}`)
+      } else {
+        setStatus('error')
+      }
     } catch {
       setStatus('error')
     }
   }
 
-  if (status === 'success') {
-    return (
-      <div className="text-center py-8">
-        <div className="w-16 h-16 bg-sage-50 rounded-full flex items-center justify-center mx-auto mb-4">
-          <svg className="w-8 h-8 text-sage" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-          </svg>
-        </div>
-        <h3 className="font-serif text-2xl text-forest mb-2">You&apos;re In!</h3>
-        <p className="text-muted">Check your email for instant access to The Peaceful Mind Method.</p>
-      </div>
-    )
-  }
-
   return (
     <form onSubmit={handleSubmit} className="space-y-4" aria-label="Get instant access form">
       <div>
-        <label htmlFor="lead-name" className="block text-sm font-semibold text-forest mb-1">Full Name</label>
+        <label htmlFor="lead-tier" className="block text-sm font-semibold text-forest mb-1">Gói đăng ký</label>
+        <select
+          id="lead-tier"
+          value={selectedTier}
+          onChange={e => setSelectedTier(e.target.value)}
+          className="w-full rounded-xl border-2 border-cream-300 bg-white px-4 py-3 text-forest focus:border-sage focus:outline-none transition-colors font-medium"
+        >
+          {Object.entries(TIER_MAPPING).map(([key, val]) => (
+            <option key={key} value={key}>
+              {val.label}
+            </option>
+          ))}
+        </select>
+      </div>
+
+      <div>
+        <label htmlFor="lead-name" className="block text-sm font-semibold text-forest mb-1">Họ và Tên</label>
         <input
           id="lead-name"
           type="text"
           required
-          placeholder="Your first name"
+          placeholder="Nhập họ tên của bạn"
           value={form.name}
           onChange={e => setForm(f => ({ ...f, name: e.target.value }))}
           className="w-full rounded-xl border-2 border-cream-300 bg-white px-4 py-3 text-forest placeholder:text-muted focus:border-sage focus:outline-none transition-colors"
         />
       </div>
+      
       <div>
-        <label htmlFor="lead-email" className="block text-sm font-semibold text-forest mb-1">Email Address</label>
+        <label htmlFor="lead-email" className="block text-sm font-semibold text-forest mb-1">Địa chỉ Email</label>
         <input
           id="lead-email"
           type="email"
           required
-          placeholder="your@email.com"
+          placeholder="email@cua-ban.com"
           value={form.email}
           onChange={e => setForm(f => ({ ...f, email: e.target.value }))}
           className="w-full rounded-xl border-2 border-cream-300 bg-white px-4 py-3 text-forest placeholder:text-muted focus:border-sage focus:outline-none transition-colors"
         />
       </div>
+      
       <div>
-        <label htmlFor="lead-phone" className="block text-sm font-semibold text-forest mb-1">Phone (optional)</label>
+        <label htmlFor="lead-phone" className="block text-sm font-semibold text-forest mb-1">Số điện thoại</label>
         <input
           id="lead-phone"
           type="tel"
-          placeholder="(555) 000-0000"
+          required
+          placeholder="Ví dụ: 0912345678"
           value={form.phone}
           onChange={e => setForm(f => ({ ...f, phone: e.target.value }))}
           className="w-full rounded-xl border-2 border-cream-300 bg-white px-4 py-3 text-forest placeholder:text-muted focus:border-sage focus:outline-none transition-colors"
         />
       </div>
+      
       {status === 'error' && (
-        <p className="text-red-600 text-sm" role="alert">Something went wrong. Please try again.</p>
+        <p className="text-red-600 text-sm" role="alert">Đã xảy ra lỗi kết nối. Vui lòng thử lại.</p>
       )}
+      
       <button
         type="submit"
-        disabled={status === 'loading'}
+        disabled={status === 'loading' || status === 'success'}
         className="btn-primary w-full text-xl py-5 disabled:opacity-60"
         id="lead-form-submit"
       >
@@ -87,12 +132,17 @@ export default function LeadForm({ tier }: { tier: string }) {
               <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"/>
               <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8z"/>
             </svg>
-            Processing...
+            Đang xử lý đơn hàng...
           </span>
-        ) : 'Get Instant Access — $14.97'}
+        ) : status === 'success' ? (
+          'Đang chuyển sang thanh toán...'
+        ) : (
+          `Đăng ký ngay — ${tierInfo.priceLabel}`
+        )}
       </button>
+      
       <p className="text-center text-sm text-muted">
-        🔒 Secure checkout · Instant digital delivery · 90-Day Peace Promise
+        🔒 Bảo mật thanh toán · Nhận tài liệu ngay · 90 ngày bảo hành hoàn tiền
       </p>
     </form>
   )
