@@ -67,6 +67,11 @@ export async function POST(req: Request) {
 
     const { lead, method } = matchResult;
 
+    // Guard: method 'none' đã được xử lý ở trên (no_match), không thể đến đây
+    if (method === 'none') {
+      return NextResponse.json({ success: true, status: 'no_match' });
+    }
+
     // 6. AMOUNT VALIDATION — reject underpayment, accept overpayment
     if (payload.transferAmount < lead.amount) {
       console.error(`[sepay-webhook] Underpayment: order=${lead.orderId} expected=${lead.amount} got=${payload.transferAmount}`);

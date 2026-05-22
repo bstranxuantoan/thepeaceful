@@ -6,11 +6,8 @@
 // Includes:
 //   - generateVietQRUrl(): build QR URL theo VietQR standard
 //   - parseOrderIdFromContent(): parse "DH000123" từ content khách dán
-//                                handle bank dash-stripping + uppercase + extra prefix
-//   - verifySepayAuth(): timing-safe comparison cho Apikey auth
+//   - verifySepayAuth(): constant-time comparison cho Apikey auth
 //   - formatVND(): Vietnamese locale currency format
-
-import { timingSafeEqual } from 'crypto';
 
 // =============================================================================
 // QR generation
@@ -91,14 +88,13 @@ export function verifySepayAuth(authHeader: string | null, expectedKey: string):
     return false;
   }
 
-  try {
-    const expected = Buffer.from(expectedKey);
-    const provided = Buffer.from(providedKey);
-    if (expected.length !== provided.length) return false;
-    return timingSafeEqual(expected, provided);
-  } catch {
-    return false;
+  // Pure JS constant-time comparison — avoid Node.js crypto dependency
+  if (providedKey.length !== expectedKey.length) return false;
+  let result = 0;
+  for (let i = 0; i < expectedKey.length; i++) {
+    result |= providedKey.charCodeAt(i) ^ expectedKey.charCodeAt(i);
   }
+  return result === 0;
 }
 
 // =============================================================================
