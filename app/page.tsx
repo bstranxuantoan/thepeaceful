@@ -1,7 +1,7 @@
-import Image from 'next/image'
 import LeadForm from '@/components/LeadForm'
 import FAQAccordion from '@/components/FAQAccordion'
 import StickyMobileCTA from '@/components/StickyMobileCTA'
+import ClientDynamicPrice from '@/components/ClientDynamicPrice'
 
 const pains = [
   {
@@ -154,8 +154,8 @@ export default function Page() {
             <span className="font-serif font-semibold text-forest text-lg leading-tight">
               The Peaceful Mind<br className="hidden sm:block" /> Method
             </span>
-            <a href="#pricing" id="nav-cta" className="btn-primary text-sm px-5 py-2.5 no-underline">
-              Get Access — $1.85
+            <a href="#checkout" className="btn-primary" id="header-cta-button">
+              <ClientDynamicPrice enPrice="$1.85" viPrice="50,000đ" textEn="Get Access" textVi="Truy Cập Ngay" />
             </a>
           </div>
         </nav>

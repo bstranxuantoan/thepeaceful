@@ -1,6 +1,8 @@
 'use client'
 import { useEffect, useState } from 'react'
 
+import ClientDynamicPrice from './ClientDynamicPrice'
+
 export default function StickyMobileCTA() {
   const [visible, setVisible] = useState(false)
 
@@ -20,10 +22,10 @@ export default function StickyMobileCTA() {
     >
       <a
         href="#pricing"
-        id="sticky-cta-button"
-        className="btn-primary w-full text-base py-4 no-underline"
+        id="sticky-mobile-cta"
+        className="btn-primary w-full shadow-lg shadow-sage/30 flex items-center justify-center py-3.5 text-[15px]"
       >
-        Get Instant Access — $14.97
+        <ClientDynamicPrice enPrice="$1.85" viPrice="50,000đ" textEn="Get Access Now" textVi="Truy Cập Ngay" />
       </a>
       <p className="text-center text-xs text-muted mt-1">90-Day Peace Promise · $241 Value</p>
     </div>

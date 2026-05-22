@@ -12,7 +12,21 @@ export default function LanguageSwitcher() {
   const [lang, setLang] = useState('en');
 
   useEffect(() => {
-    // Inject Google Translate script only once
+    // Force default to Vietnamese if no preference is saved
+    const savedLang = localStorage.getItem('preferred-language');
+    let targetLang = 'vi'; // Default to vi
+    
+    if (savedLang === 'en') {
+      targetLang = 'en';
+    }
+
+    setLang(targetLang);
+
+    if (targetLang === 'vi' && !document.cookie.includes('googtrans=/en/vi')) {
+      document.cookie = `googtrans=/en/vi; path=/; domain=${window.location.hostname}`;
+      document.cookie = `googtrans=/en/vi; path=/`;
+    }
+
     if (!document.getElementById('google-translate-script')) {
       const addScript = document.createElement('script');
       addScript.id = 'google-translate-script';
@@ -22,21 +36,39 @@ export default function LanguageSwitcher() {
 
       window.googleTranslateElementInit = () => {
         new window.google.translate.TranslateElement(
-          { pageLanguage: 'en', includedLanguages: 'en,vi', autoDisplay: false },
+          { pageLanguage: 'en', includedLanguages: 'en,vi', layout: window.google.translate.TranslateElement.InlineLayout.SIMPLE, autoDisplay: false },
           'google_translate_element'
         );
       };
     }
+    
+    // Notify other components of initial language
+    window.dispatchEvent(new CustomEvent('language-changed', { detail: targetLang }));
   }, []);
 
   const changeLanguage = (langCode: string) => {
     setLang(langCode);
+    
+    // Set Google Translate cookies
+    if (langCode === 'vi') {
+      document.cookie = `googtrans=/en/vi; path=/; domain=${window.location.hostname}`;
+      document.cookie = `googtrans=/en/vi; path=/`;
+    } else {
+      document.cookie = `googtrans=/en/en; path=/; domain=${window.location.hostname}`;
+      document.cookie = `googtrans=/en/en; path=/`;
+    }
+
+    // Try instant translation
     const select = document.querySelector('.goog-te-combo') as HTMLSelectElement;
     if (select) {
       select.value = langCode;
-      select.dispatchEvent(new Event('change'));
+      select.dispatchEvent(new Event('change', { bubbles: true }));
+    } else {
+      // Fallback: reload to apply cookie
+      window.location.reload();
     }
-    // Save state and notify other components
+    
+    // Save state and notify LeadForm
     localStorage.setItem('preferred-language', langCode);
     window.dispatchEvent(new CustomEvent('language-changed', { detail: langCode }));
   };
