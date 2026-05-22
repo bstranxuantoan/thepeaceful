@@ -2,10 +2,10 @@
 import { useEffect, useState } from 'react';
 
 export default function ClientDynamicPrice({ enPrice, viPrice, textEn, textVi, className }: { enPrice: string, viPrice: string, textEn: string, textVi: string, className?: string }) {
-  const [lang, setLang] = useState('en');
+  const [lang, setLang] = useState('vi');
 
   useEffect(() => {
-    const currentLang = localStorage.getItem('preferred-language') || 'en';
+    const currentLang = localStorage.getItem('preferred-language') || 'vi';
     setLang(currentLang);
 
     const handleLangChange = (e: Event) => {
@@ -18,7 +18,7 @@ export default function ClientDynamicPrice({ enPrice, viPrice, textEn, textVi, c
   }, []);
 
   return (
-    <span className={className}>
+    <span className={`notranslate ${className || ''}`}>
       {lang === 'vi' ? textVi + ' — ' + viPrice : textEn + ' — ' + enPrice}
     </span>
   );

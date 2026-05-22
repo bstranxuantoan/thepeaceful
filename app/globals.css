@@ -4,6 +4,20 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Forcefully hide Google Translate Banner and tooltips */
+body { top: 0px !important; position: static !important; }
+iframe.goog-te-banner-frame,
+.goog-te-banner-frame,
+#goog-gt-tt,
+.goog-te-balloon-frame {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  height: 0 !important;
+  width: 0 !important;
+}
+.goog-text-highlight { background: none !important; box-shadow: none !important; }
+
 @layer base {
   *, *::before, *::after { box-sizing: border-box; }
 

@@ -33,11 +33,11 @@ export default function LeadForm({ tier: initialTier }: { tier: string }) {
   const [selectedTier, setSelectedTier] = useState<string>(initialTier || 'standard')
   const [form, setForm] = useState({ name: '', email: '', phone: '' })
   const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle')
-  const [lang, setLang] = useState('en')
+  const [lang, setLang] = useState('vi')
   const router = useRouter()
 
   useEffect(() => {
-    const currentLang = localStorage.getItem('preferred-language') || 'en'
+    const currentLang = localStorage.getItem('preferred-language') || 'vi'
     setLang(currentLang)
 
     const handleLangChange = (e: Event) => {
@@ -96,15 +96,17 @@ export default function LeadForm({ tier: initialTier }: { tier: string }) {
   return (
     <form onSubmit={handleSubmit} className="space-y-4" aria-label="Get instant access form">
       <div>
-        <label htmlFor="lead-tier" className="block text-sm font-semibold text-forest mb-1">Select Tier</label>
+        <label htmlFor="tier" className="block text-sm font-semibold text-forest mb-2">
+          Select Your Package
+        </label>
         <select
-          id="lead-tier"
+          id="tier"
           value={selectedTier}
-          onChange={e => setSelectedTier(e.target.value)}
-          className="w-full rounded-xl border-2 border-cream-300 bg-white px-4 py-3 text-forest focus:border-sage focus:outline-none transition-colors font-medium"
+          onChange={(e) => setSelectedTier(e.target.value)}
+          className="w-full px-4 py-3 bg-white border border-sage/40 rounded-lg focus:outline-none focus:ring-2 focus:ring-forest focus:border-transparent transition-shadow text-forest notranslate"
         >
           {Object.entries(TIER_MAPPING).map(([key, val]) => (
-            <option key={key} value={key}>
+            <option key={key} value={key} className="notranslate">
               {lang === 'vi' ? val.labelVI : val.labelEN}
             </option>
           ))}
@@ -157,17 +159,10 @@ export default function LeadForm({ tier: initialTier }: { tier: string }) {
       <button
         type="submit"
         disabled={status === 'loading' || status === 'success'}
-        className="btn-primary w-full text-xl py-5 disabled:opacity-60"
-        id="lead-form-submit"
+        className="btn-primary w-full mt-6 py-4 text-lg font-bold flex items-center justify-center gap-2 disabled:opacity-70 disabled:cursor-not-allowed notranslate"
       >
         {status === 'loading' ? (
-          <span className="flex items-center gap-2 justify-center">
-            <svg className="animate-spin w-5 h-5" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-              <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"/>
-              <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8z"/>
-            </svg>
-            Processing your order...
-          </span>
+          'Processing...'
         ) : status === 'success' ? (
           'Redirecting to checkout...'
         ) : (
