@@ -28,6 +28,19 @@ export default function LanguageSwitcher() {
     }
 
     if (!document.getElementById('google-translate-script')) {
+      // Forcefully inject global CSS to hide Google Translate banner
+      const style = document.createElement('style');
+      style.id = 'hide-google-translate-banner';
+      style.innerHTML = `
+        body { top: 0px !important; position: static !important; }
+        iframe.goog-te-banner-frame { display: none !important; visibility: hidden !important; }
+        .goog-te-banner-frame { display: none !important; visibility: hidden !important; }
+        #goog-gt-tt { display: none !important; }
+        .goog-te-balloon-frame { display: none !important; }
+        .goog-text-highlight { background: none !important; box-shadow: none !important; }
+      `;
+      document.head.appendChild(style);
+
       const addScript = document.createElement('script');
       addScript.id = 'google-translate-script';
       addScript.src = '//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit';
@@ -82,30 +95,21 @@ export default function LanguageSwitcher() {
       <div className="fixed top-4 right-4 z-50 flex bg-white/90 backdrop-blur-md border border-sage/20 p-1.5 rounded-full shadow-lg">
         <button
           onClick={() => changeLanguage('en')}
-          className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-bold transition-all ${
+          className={`px-3 py-1.5 rounded-full text-xs font-bold transition-all ${
             lang === 'en' ? 'bg-[#003366] text-white shadow-md' : 'text-gray-500 hover:text-[#003366] bg-transparent'
           }`}
         >
-          <span className="text-sm">🇺🇸</span> EN
+          EN
         </button>
         <button
           onClick={() => changeLanguage('vi')}
-          className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-bold transition-all ${
+          className={`px-3 py-1.5 rounded-full text-xs font-bold transition-all ${
             lang === 'vi' ? 'bg-[#DA251D] text-white shadow-md' : 'text-gray-500 hover:text-[#DA251D] bg-transparent'
           }`}
         >
-          <span className="text-sm">🇻🇳</span> VI
+          VN
         </button>
       </div>
-
-      {/* CSS to completely hide Google's default top banner and tooltip */}
-      <style dangerouslySetInnerHTML={{ __html: `
-        body { top: 0px !important; position: static !important; }
-        .goog-te-banner-frame { display: none !important; }
-        #goog-gt-tt { display: none !important; }
-        .goog-te-balloon-frame { display: none !important; }
-        .goog-text-highlight { background: none !important; box-shadow: none !important; }
-      ` }} />
     </>
   );
 }
