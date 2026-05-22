@@ -5,21 +5,21 @@ import { useRouter } from 'next/navigation'
 const TIER_MAPPING: Record<string, { productName: string; amount: number; priceLabel: string; label: string }> = {
   basic: {
     productName: 'The Peaceful Mind Method - Book Only',
-    amount: 269000,
-    priceLabel: '269.000đ',
-    label: 'Gói Sách Đọc (Book Only) — 269.000đ',
+    amount: 20000,
+    priceLabel: '20.000đ',
+    label: 'Gói Sách Đọc (Book Only) — 20.000đ',
   },
   standard: {
     productName: 'The Peaceful Mind Method - Full Bundle',
-    amount: 404000,
-    priceLabel: '404.000đ',
-    label: 'Gói Đầy Đủ (Full Bundle) — 404.000đ',
+    amount: 50000,
+    priceLabel: '50.000đ',
+    label: 'Gói Đầy Đủ (Full Bundle) — 50.000đ',
   },
   premium: {
     productName: 'The Peaceful Mind Method - Premium + Support',
-    amount: 999000,
-    priceLabel: '999.000đ',
-    label: 'Gói Cao Cấp (Premium + Support) — 999.000đ',
+    amount: 100000,
+    priceLabel: '100.000đ',
+    label: 'Gói Cao Cấp (Premium + Support) — 100.000đ',
   },
 }
 

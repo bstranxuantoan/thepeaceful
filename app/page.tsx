@@ -108,7 +108,7 @@ const tiers = [
   {
     id: 'basic',
     label: 'Book Only',
-    price: '269.000đ',
+    price: '20.000đ',
     includes: ['120-page companion book (PDF)'],
     recommended: false,
     note: 'No guided video sessions',
@@ -117,7 +117,7 @@ const tiers = [
     id: 'standard',
     label: 'Full Bundle',
     sublabel: 'BEST VALUE',
-    price: '404.000đ',
+    price: '50.000đ',
     originalPrice: '729.000đ',
     includes: [
       'Book + 21 Video Sessions (10 min each)',
@@ -132,7 +132,7 @@ const tiers = [
   {
     id: 'premium',
     label: 'Premium + Support',
-    price: '999.000đ',
+    price: '100.000đ',
     includes: [
       'Everything in Full Bundle',
       '30-Day Personal Email Support',
@@ -495,7 +495,7 @@ export default function Page() {
               <strong className="text-forest">48 hours after purchase.</strong>
             </p>
             <a href="#lead-form" id="urgency-cta" className="btn-primary no-underline inline-flex">
-              Lock In 404.000đ Now
+              Lock In 50.000đ Now
             </a>
           </div>
         </section>
