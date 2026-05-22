@@ -102,6 +102,7 @@ export default async function ThanksPage({ searchParams }: Props) {
             Tham gia Nhóm Zalo ngay
           </a>
         </div>
+      </div>
 
       <div className="mt-6 text-center text-xs text-muted">
         © {new Date().getFullYear()} The Peaceful Mind Method. All rights reserved.
