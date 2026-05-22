@@ -101,6 +101,15 @@ export default async function ThanksPage({ searchParams }: Props) {
             </svg>
             Join Zalo Group Now
           </a>
+          
+          <div className="mt-4 pt-4 border-t border-[#0068FF]/10">
+            <Link 
+              href="/"
+              className="inline-block text-sm font-medium text-sage hover:text-forest transition-colors underline"
+            >
+              ← Trở về trang chủ (Return to Homepage)
+            </Link>
+          </div>
         </div>
       </div>
 

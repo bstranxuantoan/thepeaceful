@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import './globals.css'
 import Chatbot from '@/components/Chatbot'
+import LanguageSwitcher from '@/components/LanguageSwitcher'
 
 export const metadata: Metadata = {
   title: 'The Peaceful Mind Method — Sleep Better & Feel Calm in 21 Days',
@@ -25,6 +26,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body suppressHydrationWarning>
         {children}
         <Chatbot />
+        <LanguageSwitcher />
       </body>
     </html>
   )
