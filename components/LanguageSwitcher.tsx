@@ -62,28 +62,27 @@ export default function LanguageSwitcher() {
   const changeLanguage = (langCode: string) => {
     setLang(langCode);
     
-    // Set Google Translate cookies
+    // Save state and notify LeadForm immediately
+    localStorage.setItem('preferred-language', langCode);
+    window.dispatchEvent(new CustomEvent('language-changed', { detail: langCode }));
+
     if (langCode === 'vi') {
       document.cookie = `googtrans=/en/vi; path=/; domain=${window.location.hostname}`;
       document.cookie = `googtrans=/en/vi; path=/`;
+      
+      const select = document.querySelector('.goog-te-combo') as HTMLSelectElement;
+      if (select) {
+        select.value = langCode;
+        select.dispatchEvent(new Event('change', { bubbles: true }));
+      } else {
+        window.location.reload();
+      }
     } else {
-      document.cookie = `googtrans=/en/en; path=/; domain=${window.location.hostname}`;
-      document.cookie = `googtrans=/en/en; path=/`;
-    }
-
-    // Try instant translation
-    const select = document.querySelector('.goog-te-combo') as HTMLSelectElement;
-    if (select) {
-      select.value = langCode;
-      select.dispatchEvent(new Event('change', { bubbles: true }));
-    } else {
-      // Fallback: reload to apply cookie
+      // To properly restore English, we must clear the cookie and reload
+      document.cookie = `googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=${window.location.hostname}`;
+      document.cookie = `googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/`;
       window.location.reload();
     }
-    
-    // Save state and notify LeadForm
-    localStorage.setItem('preferred-language', langCode);
-    window.dispatchEvent(new CustomEvent('language-changed', { detail: langCode }));
   };
 
   return (
