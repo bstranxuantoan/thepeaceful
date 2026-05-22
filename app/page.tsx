@@ -58,7 +58,7 @@ const bonuses = [
     badge: 'bg-sage text-white',
     title: '"Tonight\'s Sleep" — Emergency Calm Session',
     desc: 'One 5-minute video for when you need calm RIGHT NOW. Baked-in before you even finish reading this.',
-    value: '75.000đ',
+    value: '$29',
   },
   {
     tag: 'BONUS B',
@@ -66,7 +66,7 @@ const bonuses = [
     badge: 'bg-amber text-white',
     title: '"Worry-Free Morning" — 7-Day Audio Series',
     desc: '7 audio-only sessions (5 min each). Just close your eyes and listen. No screen, no tech required.',
-    value: '100.000đ',
+    value: '$37',
   },
   {
     tag: 'BONUS G',
@@ -74,7 +74,7 @@ const bonuses = [
     badge: 'bg-forest text-white',
     title: '"Doctor\'s Notes" — Science PDF',
     desc: 'Clinical research from Mayo Clinic, Harvard Health & NIH in plain English. Answers: "Will this really work for me?"',
-    value: '50.000đ',
+    value: '$19',
   },
   {
     tag: '⚡ BONUS F — 48h Only',
@@ -82,7 +82,7 @@ const bonuses = [
     badge: 'bg-amber-600 text-white',
     title: '"Start Tonight" — Quick-Start Checklist',
     desc: 'One page. Three minutes. Everything you need to do your first session tonight.',
-    value: '25.000đ',
+    value: '$9',
   },
 ]
 
@@ -108,7 +108,7 @@ const tiers = [
   {
     id: 'basic',
     label: 'Book Only',
-    price: '20.000đ',
+    price: '$0.74',
     includes: ['120-page companion book (PDF)'],
     recommended: false,
     note: 'No guided video sessions',
@@ -117,8 +117,8 @@ const tiers = [
     id: 'standard',
     label: 'Full Bundle',
     sublabel: 'BEST VALUE',
-    price: '50.000đ',
-    originalPrice: '150.000đ',
+    price: '$1.85',
+    originalPrice: '$27',
     includes: [
       'Book + 21 Video Sessions (10 min each)',
       'Tonight\'s Sleep Emergency Session',
@@ -132,7 +132,7 @@ const tiers = [
   {
     id: 'premium',
     label: 'Premium + Support',
-    price: '100.000đ',
+    price: '$3.70',
     includes: [
       'Everything in Full Bundle',
       '30-Day Personal Email Support',
@@ -155,7 +155,7 @@ export default function Page() {
               The Peaceful Mind<br className="hidden sm:block" /> Method
             </span>
             <a href="#pricing" id="nav-cta" className="btn-primary text-sm px-5 py-2.5 no-underline">
-              Get Access — 50.000đ
+              Get Access — $1.85
             </a>
           </div>
         </nav>
@@ -177,9 +177,9 @@ export default function Page() {
                   No apps. No prior experience. Works from the very first night.
                 </p>
                 <a href="#lead-form" id="hero-cta" className="btn-primary text-xl mb-4 no-underline inline-flex">
-                  Get Instant Access — 50.000đ
+                  Get Instant Access — $1.85
                 </a>
-                <p className="text-muted text-sm mb-6">Giá trị thực 6.500.000đ · Launch price ends soon</p>
+                <p className="text-muted text-sm mb-6">$241 total value · Launch price ends soon</p>
                 <div className="flex flex-wrap gap-3 text-sm text-forest font-semibold">
               {['No App Required', 'Works in 10 Minutes', '90-Day Peace Promise'].map(t => (
                 <div key={t} className="flex items-center gap-2 bg-sage-50 rounded-full px-4 py-2 border border-sage-100">
@@ -349,11 +349,11 @@ export default function Page() {
             {/* Value summary */}
             <div className="card bg-sage text-white text-center border-0">
               <p className="text-sage-100 mb-1">Total Value</p>
-              <p className="font-serif text-5xl font-bold mb-2">6.500.000đ</p>
+              <p className="font-serif text-5xl font-bold mb-2">$241</p>
               <p className="text-sage-100 text-lg mb-4">Your price today (launch week only)</p>
-              <p className="font-serif text-6xl font-bold mb-4">50.000đ</p>
+              <p className="font-serif text-6xl font-bold mb-4">$1.85</p>
               <a href="#lead-form" id="stack-cta" className="inline-flex items-center justify-center gap-2 bg-white text-sage font-sans font-bold rounded-2xl px-8 py-4 text-lg hover:bg-cream transition-colors cursor-pointer no-underline">
-                Get Everything for 50.000đ
+                Get Everything for $1.85
               </a>
             </div>
           </div>
@@ -490,12 +490,12 @@ export default function Page() {
               This launch price disappears soon
             </h2>
             <p className="text-lg text-muted mb-6">
-              The Full Bundle returns to <strong className="text-forest">150.000đ</strong> after launch week ends.
+              The Full Bundle returns to <strong className="text-forest">$27</strong> after launch week ends.
               The &ldquo;Start Tonight&rdquo; checklist (Bonus F) expires{' '}
               <strong className="text-forest">48 hours after purchase.</strong>
             </p>
             <a href="#lead-form" id="urgency-cta" className="btn-primary no-underline inline-flex">
-              Lock In 50.000đ Now
+              Lock In $1.85 Now
             </a>
           </div>
         </section>
@@ -522,9 +522,9 @@ export default function Page() {
               10 minutes a day. 21 days. The rest of your life, changed.
             </p>
             <a href="#lead-form" id="final-cta" className="btn-primary text-xl no-underline inline-flex">
-              Get Instant Access — 50.000đ
+              Get Instant Access — $1.85
             </a>
-            <p className="text-muted text-sm mt-4">Instant delivery · 90-Day Peace Promise · Giá trị thực 6.500.000đ</p>
+            <p className="text-muted text-sm mt-4">Instant delivery · 90-Day Peace Promise · $241 value</p>
           </div>
         </section>
 

@@ -29,51 +29,51 @@ export default async function ThanksPage({ searchParams }: Props) {
         </div>
 
         <span className="bg-sage text-white text-xs font-bold px-3 py-1.5 rounded-full uppercase tracking-wider">
-          Thanh Toán Thành Công
+          Payment Successful
         </span>
 
         <h1 className="mt-4 text-3xl font-serif font-bold text-forest">
-          Cảm ơn bạn!
+          Thank you!
         </h1>
         
         <p className="mt-2 text-sm text-muted">
-          Đơn hàng của bạn đã được hệ thống tự động xác nhận thành công.
+          Your order has been automatically confirmed. We've also sent the details to your email!
         </p>
 
         {/* Order Details box */}
         {lead ? (
           <div className="my-6 p-4 rounded-2xl bg-gray-50 border border-gray-100 text-left text-sm space-y-2">
             <div className="flex justify-between">
-              <span className="text-gray-500">Mã đơn hàng:</span>
+              <span className="text-gray-500">Order ID:</span>
               <span className="font-mono font-bold text-forest">{lead.orderId}</span>
             </div>
             <div className="flex justify-between">
-              <span className="text-gray-500">Khách hàng:</span>
+              <span className="text-gray-500">Name:</span>
               <span className="font-semibold text-gray-900">{lead.name}</span>
             </div>
             <div className="flex justify-between">
-              <span className="text-gray-500">Email nhận bài:</span>
+              <span className="text-gray-500">Email:</span>
               <span className="font-semibold text-gray-900 break-all">{lead.email}</span>
             </div>
             <div className="flex justify-between">
-              <span className="text-gray-500">Gói sản phẩm:</span>
+              <span className="text-gray-500">Product:</span>
               <span className="font-semibold text-gray-900">{lead.productName}</span>
             </div>
             <div className="flex justify-between pt-2 border-t border-gray-200">
-              <span className="text-gray-500 font-semibold">Tổng thanh toán:</span>
+              <span className="text-gray-500 font-semibold">Total paid (VND):</span>
               <span className="font-bold text-sage">{(lead.amount).toLocaleString('vi-VN')}đ</span>
             </div>
           </div>
         ) : (
           <div className="my-6 p-4 rounded-2xl bg-gray-50 border border-gray-100 text-sm">
-            <p className="text-gray-500">Đang tải thông tin đơn hàng...</p>
+            <p className="text-gray-500">Loading order details...</p>
           </div>
         )}
 
         <div className="p-5 rounded-2xl bg-[#E8F2FF] border border-[#0068FF]/20 text-center mb-6">
-          <h3 className="font-bold text-[#0068FF] mb-2">Bước cuối cùng: Tham gia Nhóm Zalo</h3>
+          <h3 className="font-bold text-[#0068FF] mb-2">Final Step: Join Our Zalo Group</h3>
           <p className="text-sm text-gray-700 mb-4 leading-relaxed">
-            Mọi tài liệu, hướng dẫn và hỗ trợ trực tiếp sẽ được gửi qua nhóm Zalo kín dành riêng cho học viên.
+            All materials, guides, and direct support will be provided via our exclusive members-only Zalo group. We've also emailed you the link!
           </p>
           
           <div className="flex justify-center mb-4">
@@ -88,7 +88,7 @@ export default async function ThanksPage({ searchParams }: Props) {
             </div>
           </div>
           
-          <p className="text-xs text-gray-500 mb-4">Quét mã QR bằng ứng dụng Zalo hoặc bấm nút dưới đây</p>
+          <p className="text-xs text-gray-500 mb-4">Scan the QR code with Zalo app or click the button below</p>
 
           <a
             href="https://zalo.me/g/tfjys46kkhw79hbslpxm"
@@ -99,7 +99,7 @@ export default async function ThanksPage({ searchParams }: Props) {
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M21.168 7.332c-1.396-4.528-6.906-5.836-10.748-4.708-5.32 1.564-7.514 7.646-4.832 12.392.516.91.56 1.946.12 2.894l-1.076 2.32a1.083 1.083 0 001.378 1.436l2.42-1.002c.896-.372 1.902-.378 2.802-.016 4.706 1.888 10.366-1.156 11.458-6.198.814-3.766-.522-6.666-1.522-7.118z" fill="currentColor"/>
             </svg>
-            Tham gia Nhóm Zalo ngay
+            Join Zalo Group Now
           </a>
         </div>
       </div>

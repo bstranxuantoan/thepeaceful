@@ -32,14 +32,15 @@ export default async function CheckoutPage({ params }: { params: Promise<{ order
       <div className="rounded-3xl bg-white p-6 shadow-xl border border-cream-300">
         <div className="text-center mb-5">
           <span className="bg-sage/10 text-sage text-xs font-bold px-3 py-1.5 rounded-full uppercase tracking-wider">
-            Thanh Toán Đơn Hàng
+            Checkout
           </span>
           <h1 className="mt-3 text-2xl font-serif font-bold text-forest">
-            Quét mã VietQR
+            Scan VietQR
           </h1>
-          <p className="mt-1.5 text-sm text-muted">
-            Mở ứng dụng ngân hàng và quét mã dưới đây
-          </p>
+          <p className="mb-2 text-sm text-gray-500">Scan QR to pay (VND)</p>
+          <h2 className="mb-4 font-mono text-3xl font-bold text-sage">
+            {lead.amount.toLocaleString('vi-VN')}đ
+          </h2>
         </div>
 
         {/* QR Code Container */}
@@ -65,24 +66,28 @@ export default async function CheckoutPage({ params }: { params: Promise<{ order
           orderId={lead.orderId}
         />
 
-        <p className="mb-5 text-center text-xs text-muted leading-relaxed">
-          ⚠️ <strong>Lưu ý:</strong> Vui lòng giữ đúng nội dung chuyển khoản <strong>{lead.orderId}</strong> để hệ thống tự động xác nhận đơn hàng sau 10 giây.
-        </p>
+        <div className="mt-6 mb-5 rounded-lg bg-yellow-50 p-4 text-left text-sm text-yellow-800">
+          <p className="font-bold">⚠️ Important Note:</p>
+          <ul className="ml-4 mt-2 list-disc space-y-1">
+            <li>Please enter the exact Transfer Content as <strong>{lead.orderId}</strong></li>
+            <li>The system will automatically confirm within 1-3 minutes.</li>
+          </ul>
+        </div>
 
         {/* Client polling status indicator */}
         <CheckoutStatusPoll orderId={lead.orderId} />
 
         {/* Order summary */}
         <div className="mt-6 border-t border-cream-300 pt-4 text-sm">
-          <div className="text-xs text-muted uppercase font-semibold tracking-wider mb-1">Chi tiết đơn hàng</div>
+          <div className="text-xs text-muted uppercase font-semibold tracking-wider mb-1">Order Details</div>
           <div className="font-serif font-bold text-forest text-base">{lead.productName}</div>
-          <div className="mt-1 text-xs text-muted">Mã đơn hàng: {lead.orderId}</div>
+          <div className="mt-1 text-xs text-muted">Order ID: {lead.orderId}</div>
         </div>
       </div>
       
       <div className="mt-6 text-center">
         <a href="/" className="text-sm font-medium text-sage hover:underline">
-          ← Quay lại trang chủ
+          ← Back to homepage
         </a>
       </div>
     </main>

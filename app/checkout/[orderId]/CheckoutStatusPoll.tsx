@@ -44,8 +44,8 @@ export function CheckoutStatusPoll({ orderId }: { orderId: string }) {
     return (
       <div className="rounded-lg bg-green-50 p-4 text-center">
         <div className="mb-2 text-3xl">✓</div>
-        <div className="font-bold text-green-900">Thanh toán thành công!</div>
-        <div className="text-sm text-green-700">Đang chuyển trang...</div>
+        <div className="font-bold text-green-900">Payment Successful!</div>
+        <div className="text-sm text-green-700">Redirecting...</div>
       </div>
     );
   }
@@ -53,7 +53,7 @@ export function CheckoutStatusPoll({ orderId }: { orderId: string }) {
   if (status === 'expired') {
     return (
       <div className="rounded-lg bg-yellow-50 p-4 text-center text-sm text-yellow-900">
-        ⚠️ Đơn hàng đã hết hạn. Vui lòng tạo đơn mới.
+        ⚠️ This order has expired. Please create a new one.
       </div>
     );
   }
@@ -61,7 +61,7 @@ export function CheckoutStatusPoll({ orderId }: { orderId: string }) {
   return (
     <div className="flex items-center justify-center gap-3 rounded-lg bg-gray-50 p-4 text-sm text-gray-700">
       <span className="inline-block h-3 w-3 animate-pulse rounded-full bg-blue-500" aria-hidden />
-      Đang chờ thanh toán... (tự động xác nhận khi tiền vào)
+      Waiting for payment... (auto-confirms when received)
     </div>
   );
 }

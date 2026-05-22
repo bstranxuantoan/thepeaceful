@@ -6,20 +6,20 @@ const TIER_MAPPING: Record<string, { productName: string; amount: number; priceL
   basic: {
     productName: 'The Peaceful Mind Method - Book Only',
     amount: 20000,
-    priceLabel: '20.000đ',
-    label: 'Gói Sách Đọc (Book Only) — 20.000đ',
+    priceLabel: '$0.74',
+    label: 'Book Only — $0.74',
   },
   standard: {
     productName: 'The Peaceful Mind Method - Full Bundle',
     amount: 50000,
-    priceLabel: '50.000đ',
-    label: 'Gói Đầy Đủ (Full Bundle) — 50.000đ',
+    priceLabel: '$1.85',
+    label: 'Full Bundle — $1.85',
   },
   premium: {
     productName: 'The Peaceful Mind Method - Premium + Support',
     amount: 100000,
-    priceLabel: '100.000đ',
-    label: 'Gói Cao Cấp (Premium + Support) — 100.000đ',
+    priceLabel: '$3.70',
+    label: 'Premium + Support — $3.70',
   },
 }
 
@@ -76,7 +76,7 @@ export default function LeadForm({ tier: initialTier }: { tier: string }) {
   return (
     <form onSubmit={handleSubmit} className="space-y-4" aria-label="Get instant access form">
       <div>
-        <label htmlFor="lead-tier" className="block text-sm font-semibold text-forest mb-1">Gói đăng ký</label>
+        <label htmlFor="lead-tier" className="block text-sm font-semibold text-forest mb-1">Select Tier</label>
         <select
           id="lead-tier"
           value={selectedTier}
@@ -92,12 +92,12 @@ export default function LeadForm({ tier: initialTier }: { tier: string }) {
       </div>
 
       <div>
-        <label htmlFor="lead-name" className="block text-sm font-semibold text-forest mb-1">Họ và Tên</label>
+        <label htmlFor="lead-name" className="block text-sm font-semibold text-forest mb-1">Full Name</label>
         <input
           id="lead-name"
           type="text"
           required
-          placeholder="Nhập họ tên của bạn"
+          placeholder="Enter your full name"
           value={form.name}
           onChange={e => setForm(f => ({ ...f, name: e.target.value }))}
           className="w-full rounded-xl border-2 border-cream-300 bg-white px-4 py-3 text-forest placeholder:text-muted focus:border-sage focus:outline-none transition-colors"
@@ -105,12 +105,12 @@ export default function LeadForm({ tier: initialTier }: { tier: string }) {
       </div>
       
       <div>
-        <label htmlFor="lead-email" className="block text-sm font-semibold text-forest mb-1">Địa chỉ Email</label>
+        <label htmlFor="lead-email" className="block text-sm font-semibold text-forest mb-1">Email Address</label>
         <input
           id="lead-email"
           type="email"
           required
-          placeholder="email@cua-ban.com"
+          placeholder="email@example.com"
           value={form.email}
           onChange={e => setForm(f => ({ ...f, email: e.target.value }))}
           className="w-full rounded-xl border-2 border-cream-300 bg-white px-4 py-3 text-forest placeholder:text-muted focus:border-sage focus:outline-none transition-colors"
@@ -118,12 +118,12 @@ export default function LeadForm({ tier: initialTier }: { tier: string }) {
       </div>
       
       <div>
-        <label htmlFor="lead-phone" className="block text-sm font-semibold text-forest mb-1">Số điện thoại</label>
+        <label htmlFor="lead-phone" className="block text-sm font-semibold text-forest mb-1">Phone Number (Zalo)</label>
         <input
           id="lead-phone"
           type="tel"
           required
-          placeholder="Ví dụ: 0912345678"
+          placeholder="e.g. 0912345678"
           value={form.phone}
           onChange={e => setForm(f => ({ ...f, phone: e.target.value }))}
           className="w-full rounded-xl border-2 border-cream-300 bg-white px-4 py-3 text-forest placeholder:text-muted focus:border-sage focus:outline-none transition-colors"
@@ -131,7 +131,7 @@ export default function LeadForm({ tier: initialTier }: { tier: string }) {
       </div>
       
       {status === 'error' && (
-        <p className="text-red-600 text-sm" role="alert">Đã xảy ra lỗi kết nối. Vui lòng thử lại.</p>
+        <p className="text-red-600 text-sm" role="alert">Connection error. Please try again.</p>
       )}
       
       <button
@@ -146,17 +146,17 @@ export default function LeadForm({ tier: initialTier }: { tier: string }) {
               <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"/>
               <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8z"/>
             </svg>
-            Đang xử lý đơn hàng...
+            Processing your order...
           </span>
         ) : status === 'success' ? (
-          'Đang chuyển sang thanh toán...'
+          'Redirecting to checkout...'
         ) : (
-          `Đăng ký ngay — ${tierInfo.priceLabel}`
+          `Get Access Now — ${tierInfo.priceLabel}`
         )}
       </button>
       
       <p className="text-center text-sm text-muted">
-        🔒 Bảo mật thanh toán · Nhận tài liệu ngay · 90 ngày bảo hành hoàn tiền
+        🔒 Secure payment · Instant delivery · 90-Day Money Back Guarantee
       </p>
     </form>
   )
