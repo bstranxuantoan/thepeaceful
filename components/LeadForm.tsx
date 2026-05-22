@@ -1,31 +1,23 @@
 'use client'
 import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
+import { useLanguage } from '@/components/LanguageProvider'
 
-const TIER_MAPPING: Record<string, { productName: string; amount: number; priceLabelEN: string; labelEN: string; priceLabelVI: string; labelVI: string }> = {
+const TIER_MAPPING: Record<string, { productName: string; amount: number; priceKey: 'basic' | 'standard' | 'premium' }> = {
   basic: {
     productName: 'The Peaceful Mind Method - Book Only',
     amount: 20000,
-    priceLabelEN: '$0.74',
-    labelEN: 'Book Only — $0.74',
-    priceLabelVI: '20,000đ',
-    labelVI: 'Book Only — 20,000đ',
+    priceKey: 'basic',
   },
   standard: {
     productName: 'The Peaceful Mind Method - Full Bundle',
     amount: 50000,
-    priceLabelEN: '$1.85',
-    labelEN: 'Full Bundle — $1.85',
-    priceLabelVI: '50,000đ',
-    labelVI: 'Full Bundle — 50,000đ',
+    priceKey: 'standard',
   },
   premium: {
     productName: 'The Peaceful Mind Method - Premium + Support',
     amount: 100000,
-    priceLabelEN: '$3.70',
-    labelEN: 'Premium + Support — $3.70',
-    priceLabelVI: '100,000đ',
-    labelVI: 'Premium + Support — 100,000đ',
+    priceKey: 'premium',
   },
 }
 
@@ -33,21 +25,8 @@ export default function LeadForm({ tier: initialTier }: { tier: string }) {
   const [selectedTier, setSelectedTier] = useState<string>(initialTier || 'standard')
   const [form, setForm] = useState({ name: '', email: '', phone: '' })
   const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle')
-  const [lang, setLang] = useState('vi')
+  const { t, lang } = useLanguage()
   const router = useRouter()
-
-  useEffect(() => {
-    const currentLang = localStorage.getItem('preferred-language') || 'vi'
-    setLang(currentLang)
-
-    const handleLangChange = (e: Event) => {
-      const customEvent = e as CustomEvent
-      setLang(customEvent.detail)
-    }
-
-    window.addEventListener('language-changed', handleLangChange)
-    return () => window.removeEventListener('language-changed', handleLangChange)
-  }, [])
 
   useEffect(() => {
     const handleClick = (e: MouseEvent) => {
@@ -105,9 +84,9 @@ export default function LeadForm({ tier: initialTier }: { tier: string }) {
           onChange={(e) => setSelectedTier(e.target.value)}
           className="w-full px-4 py-3 bg-white border border-sage/40 rounded-lg focus:outline-none focus:ring-2 focus:ring-forest focus:border-transparent transition-shadow text-forest notranslate"
         >
-          {Object.entries(TIER_MAPPING).map(([key, val]) => (
-            <option key={key} value={key} className="notranslate">
-              {lang === 'vi' ? val.labelVI : val.labelEN}
+          {t.pricing.tiers.map((tData) => (
+            <option key={tData.id} value={tData.id} className="notranslate">
+              {tData.label} — {t.prices[TIER_MAPPING[tData.id].priceKey]}
             </option>
           ))}
         </select>
@@ -166,7 +145,7 @@ export default function LeadForm({ tier: initialTier }: { tier: string }) {
         ) : status === 'success' ? (
           'Redirecting to checkout...'
         ) : (
-          `Get Access Now — ${lang === 'vi' ? tierInfo.priceLabelVI : tierInfo.priceLabelEN}`
+          `${t.pricing.formTitle} — ${t.prices[tierInfo.priceKey]}`
         )}
       </button>
       

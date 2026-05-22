@@ -1,35 +1,14 @@
 'use client'
 import { useState } from 'react'
-
-const faqs = [
-  {
-    q: "I've never meditated before. Can I still do this?",
-    a: "Absolutely. The Peaceful Mind Method was designed for complete beginners. The 3-Breath Anchor takes 3 minutes to learn and works from Day 1. No experience, no special skills needed.",
-  },
-  {
-    q: "Do I need any special equipment or an app?",
-    a: "None. All you need is a quiet spot to sit or lie down. The videos play on any device — phone, tablet, laptop, or TV. No subscription, no app to download, no passwords to remember.",
-  },
-  {
-    q: "What if it doesn't work for me?",
-    a: "That's exactly what our 90-Day Peace Promise covers. Try it for 90 full days. If you don't sleep better or feel calmer, email us for a full refund — and you keep the book, all 21 videos, and every bonus. Zero risk.",
-  },
-  {
-    q: "How is this different from Calm or Headspace?",
-    a: "Those apps were designed for younger, tech-savvy users with dozens of features that can feel overwhelming. The Peaceful Mind Method is one simple method — built for how the 60+ mind and body actually works.",
-  },
-  {
-    q: "How long is each session?",
-    a: "Just 10 minutes. Each of the 21 video sessions is exactly 10 minutes — long enough to work, short enough to fit into any morning or evening routine.",
-  },
-]
+import { useLanguage } from '@/components/LanguageProvider'
 
 export default function FAQAccordion() {
   const [open, setOpen] = useState<number | null>(null)
+  const { t } = useLanguage()
 
   return (
     <div className="space-y-3" id="faq-list">
-      {faqs.map((item, i) => (
+      {t.faq.items.map((item, i) => (
         <div key={i} className="card !p-0 overflow-hidden">
           <button
             onClick={() => setOpen(open === i ? null : i)}

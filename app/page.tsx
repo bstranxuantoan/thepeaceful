@@ -1,162 +1,158 @@
-import Image from 'next/image'
-import LeadForm from '@/components/LeadForm'
-import FAQAccordion from '@/components/FAQAccordion'
-import StickyMobileCTA from '@/components/StickyMobileCTA'
-import ClientDynamicPrice from '@/components/ClientDynamicPrice'
-
-const pains = [
-  {
-    icon: (
-      <svg className="w-8 h-8 text-sage" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
-      </svg>
-    ),
-    title: 'Can\'t Fall Asleep',
-    desc: 'Lying awake at 2am, mind spinning through worries — exhausted but unable to rest no matter what you try.',
-  },
-  {
-    icon: (
-      <svg className="w-8 h-8 text-sage" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
-      </svg>
-    ),
-    title: 'Lonely & Invisible',
-    desc: 'Family is busy, old friends have drifted away. Days feel long, empty, and without purpose or connection.',
-  },
-  {
-    icon: (
-      <svg className="w-8 h-8 text-sage" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M13 10V3L4 14h7v7l9-11h-7z" />
-      </svg>
-    ),
-    title: 'Exhausted & Anxious',
-    desc: 'Chronic fatigue, body aches, health worries. Your doctor says "reduce stress" — but nobody shows you how.',
-  },
-]
-
-const steps = [
-  {
-    num: '1',
-    title: 'ANCHOR',
-    desc: 'Choose one personal grounding word that signals your brain: "It\'s safe to rest now." This single word becomes your daily reset.',
-  },
-  {
-    num: '2',
-    title: 'BREATHE',
-    desc: 'A breathing pattern adapted specifically for the slower, natural rhythm of the 60+ body. No strain, no effort — just ease.',
-  },
-  {
-    num: '3',
-    title: 'DRIFT',
-    desc: 'A guided visualization that gently replaces the mental "to-do loop" with peaceful, healing imagery. Your mind finally lets go.',
-  },
-]
-
-const bonuses = [
-  {
-    tag: 'BONUS A',
-    color: 'bg-sage-50 border-sage-100',
-    badge: 'bg-sage text-white',
-    title: '"Tonight\'s Sleep" — Emergency Calm Session',
-    desc: 'One 5-minute video for when you need calm RIGHT NOW. Baked-in before you even finish reading this.',
-    value: '$29',
-  },
-  {
-    tag: 'BONUS B',
-    color: 'bg-amber-50 border-amber-100',
-    badge: 'bg-amber text-white',
-    title: '"Worry-Free Morning" — 7-Day Audio Series',
-    desc: '7 audio-only sessions (5 min each). Just close your eyes and listen. No screen, no tech required.',
-    value: '$37',
-  },
-  {
-    tag: 'BONUS G',
-    color: 'bg-cream-200 border-cream-300',
-    badge: 'bg-forest text-white',
-    title: '"Doctor\'s Notes" — Science PDF',
-    desc: 'Clinical research from Mayo Clinic, Harvard Health & NIH in plain English. Answers: "Will this really work for me?"',
-    value: '$19',
-  },
-  {
-    tag: '⚡ BONUS F — 48h Only',
-    color: 'bg-amber-50 border-amber',
-    badge: 'bg-amber-600 text-white',
-    title: '"Start Tonight" — Quick-Start Checklist',
-    desc: 'One page. Three minutes. Everything you need to do your first session tonight.',
-    value: '$9',
-  },
-]
-
-const testimonials = [
-  {
-    name: 'Margaret T., 67',
-    role: 'Retired Teacher · Phoenix, AZ',
-    text: 'I\'ve struggled with insomnia for 12 years. After the first week of the 3-Breath Anchor, I was falling asleep before 10pm. I can\'t believe something this simple works this well.',
-  },
-  {
-    name: 'Robert K., 71',
-    role: 'Retired Engineer · Portland, OR',
-    text: 'My doctor told me to reduce stress after my blood pressure spiked. I didn\'t know how. This program gave me something real to do every morning. My readings have improved and I feel calmer than I have in years.',
-  },
-  {
-    name: 'Linda M., 64',
-    role: 'Retired Nurse · Tampa, FL',
-    text: 'Since my husband passed, the nights felt endless. The guided sessions gave me something peaceful to look forward to. I sleep through the night now. I feel like myself again.',
-  },
-]
-
-const tiers = [
-  {
-    id: 'basic',
-    label: 'Book Only',
-    price: '$0.74',
-    includes: ['120-page companion book (PDF)'],
-    recommended: false,
-    note: 'No guided video sessions',
-  },
-  {
-    id: 'standard',
-    label: 'Full Bundle',
-    sublabel: 'BEST VALUE',
-    price: '$1.85',
-    originalPrice: '$27',
-    includes: [
-      'Book + 21 Video Sessions (10 min each)',
-      'Tonight\'s Sleep Emergency Session',
-      'Worry-Free Morning Audio Series',
-      'Doctor\'s Notes Science PDF',
-      'Start Tonight Checklist (48h only)',
-    ],
-    recommended: true,
-    note: 'Tổng giá trị hơn 6.500.000đ',
-  },
-  {
-    id: 'premium',
-    label: 'Premium + Support',
-    price: '$3.70',
-    includes: [
-      'Everything in Full Bundle',
-      '30-Day Personal Email Support',
-    ],
-    recommended: false,
-    note: 'For those who want personal guidance',
-  },
-]
+'use client';
+import Image from 'next/image';
+import LeadForm from '@/components/LeadForm';
+import FAQAccordion from '@/components/FAQAccordion';
+import StickyMobileCTA from '@/components/StickyMobileCTA';
+import { useLanguage } from '@/components/LanguageProvider';
 
 export default function Page() {
+  const { t, lang } = useLanguage();
+
+  const pains = [
+    {
+      icon: (
+        <svg className="w-8 h-8 text-sage" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+        </svg>
+      ),
+      title: t.problem.items[0].title,
+      desc: t.problem.items[0].desc,
+    },
+    {
+      icon: (
+        <svg className="w-8 h-8 text-sage" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+        </svg>
+      ),
+      title: t.problem.items[1].title,
+      desc: t.problem.items[1].desc,
+    },
+    {
+      icon: (
+        <svg className="w-8 h-8 text-sage" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M13 10V3L4 14h7v7l9-11h-7z" />
+        </svg>
+      ),
+      title: t.problem.items[2].title,
+      desc: t.problem.items[2].desc,
+    },
+  ];
+
+  const steps = [
+    {
+      num: '1',
+      title: t.method.items[0].title,
+      desc: t.method.items[0].desc,
+    },
+    {
+      num: '2',
+      title: t.method.items[1].title,
+      desc: t.method.items[1].desc,
+    },
+    {
+      num: '3',
+      title: t.method.items[2].title,
+      desc: t.method.items[2].desc,
+    },
+  ];
+
+  const bonuses = [
+    {
+      tag: t.offer.bonuses[0].tag,
+      color: 'bg-sage-50 border-sage-100',
+      badge: 'bg-sage text-white',
+      title: t.offer.bonuses[0].title,
+      desc: t.offer.bonuses[0].desc,
+      value: '$29',
+    },
+    {
+      tag: t.offer.bonuses[1].tag,
+      color: 'bg-amber-50 border-amber-100',
+      badge: 'bg-amber text-white',
+      title: t.offer.bonuses[1].title,
+      desc: t.offer.bonuses[1].desc,
+      value: '$37',
+    },
+    {
+      tag: t.offer.bonuses[2].tag,
+      color: 'bg-cream-200 border-cream-300',
+      badge: 'bg-forest text-white',
+      title: t.offer.bonuses[2].title,
+      desc: t.offer.bonuses[2].desc,
+      value: '$19',
+    },
+    {
+      tag: t.offer.bonuses[3].tag,
+      color: 'bg-amber-50 border-amber',
+      badge: 'bg-amber-600 text-white',
+      title: t.offer.bonuses[3].title,
+      desc: t.offer.bonuses[3].desc,
+      value: '$9',
+    },
+  ];
+
+  const testimonials = [
+    {
+      imgName: 'margaret',
+      name: t.testimonials.items[0].name,
+      role: t.testimonials.items[0].role,
+      text: t.testimonials.items[0].text,
+    },
+    {
+      imgName: 'robert',
+      name: t.testimonials.items[1].name,
+      role: t.testimonials.items[1].role,
+      text: t.testimonials.items[1].text,
+    },
+    {
+      imgName: 'linda',
+      name: t.testimonials.items[2].name,
+      role: t.testimonials.items[2].role,
+      text: t.testimonials.items[2].text,
+    },
+  ];
+
+  const tiers = [
+    {
+      id: 'basic',
+      label: t.pricing.tiers[0].label,
+      price: t.prices.basic,
+      includes: t.pricing.tiers[0].includes,
+      recommended: false,
+      note: t.pricing.tiers[0].note,
+    },
+    {
+      id: 'standard',
+      label: t.pricing.tiers[1].label,
+      sublabel: t.pricing.tiers[1].sublabel,
+      price: t.prices.standard,
+      originalPrice: t.prices.originalStandard,
+      includes: t.pricing.tiers[1].includes,
+      recommended: true,
+      note: t.pricing.tiers[1].note,
+    },
+    {
+      id: 'premium',
+      label: t.pricing.tiers[2].label,
+      price: t.prices.premium,
+      includes: t.pricing.tiers[2].includes,
+      recommended: false,
+      note: t.pricing.tiers[2].note,
+    },
+  ];
+
   return (
     <>
       <StickyMobileCTA />
       <main className="min-h-screen">
-
         {/* NAV */}
         <nav className="sticky top-0 z-40 bg-white/90 backdrop-blur-sm border-b border-cream-300 shadow-soft">
           <div className="container-lg flex items-center justify-between py-4 px-5 md:px-8">
-            <span className="font-serif font-semibold text-forest text-lg leading-tight">
-              The Peaceful Mind<br className="hidden sm:block" /> Method
+            <span className="font-serif font-semibold text-forest text-lg leading-tight whitespace-pre-line">
+              {t.nav.title}
             </span>
             <a href="#checkout" className="btn-primary" id="header-cta-button">
-              <ClientDynamicPrice enPrice="$1.85" viPrice="50,000đ" textEn="Get Access" textVi="Truy Cập Ngay" />
+              {t.nav.cta} — {t.prices.standard}
             </a>
           </div>
         </nav>
@@ -165,38 +161,36 @@ export default function Page() {
         <section id="hero" className="gradient-hero section-pad">
           <div className="container-lg">
             <div className="grid md:grid-cols-2 gap-10 items-center">
-              {/* Left — copy */}
               <div>
-                <span className="section-label">For Adults 60+ Who Deserve to Feel Well Again</span>
+                <span className="section-label">{t.hero.label}</span>
                 <h1 className="font-serif text-4xl md:text-5xl text-forest font-bold mb-6 text-balance leading-tight">
-                  Finally — A Simple 10-Minute Daily Practice That Helps You{' '}
-                  <span className="text-sage">Sleep Deeply</span>, Feel Calm, and{' '}
-                  <span className="text-sage">Enjoy Life Again</span>
+                  {t.hero.title}
+                  <span className="text-sage">{t.hero.titleHighlight1}</span>
+                  {t.hero.titleMiddle}
+                  <span className="text-sage">{t.hero.titleHighlight2}</span>
                 </h1>
                 <p className="text-xl text-muted mb-8 text-balance">
-                  The <strong className="text-forest">3-Breath Anchor Method</strong>: designed specifically for the 60+ nervous system.
-                  No apps. No prior experience. Works from the very first night.
+                  {t.hero.desc}
                 </p>
                 <a href="#lead-form" id="hero-cta" className="btn-primary text-xl mb-4 no-underline inline-flex">
-                  Get Instant Access — $1.85
+                  {t.hero.cta} — {t.prices.standard}
                 </a>
-                <p className="text-muted text-sm mb-6">$241 total value · Launch price ends soon</p>
+                <p className="text-muted text-sm mb-6">{t.hero.value}</p>
                 <div className="flex flex-wrap gap-3 text-sm text-forest font-semibold">
-              {['No App Required', 'Works in 10 Minutes', '90-Day Peace Promise'].map(t => (
-                <div key={t} className="flex items-center gap-2 bg-sage-50 rounded-full px-4 py-2 border border-sage-100">
-                  <svg className="w-4 h-4 text-sage flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 13l4 4L19 7" />
-                  </svg>
-                  {t}
-                </div>
-              ))}
+                  {t.hero.tags.map(tag => (
+                    <div key={tag} className="flex items-center gap-2 bg-sage-50 rounded-full px-4 py-2 border border-sage-100">
+                      <svg className="w-4 h-4 text-sage flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 13l4 4L19 7" />
+                      </svg>
+                      {tag}
+                    </div>
+                  ))}
                 </div>
               </div>
-              {/* Right — hero image */}
               <div className="relative rounded-3xl overflow-hidden shadow-card aspect-[4/3] md:aspect-auto md:h-[520px]">
                 <Image
                   src="/images/hero.png"
-                  alt="A peaceful senior woman meditating in soft morning light"
+                  alt="A peaceful senior woman meditating"
                   fill
                   className="object-cover"
                   priority
@@ -211,7 +205,7 @@ export default function Page() {
         {/* TRUST BAR */}
         <section className="bg-sage py-5 px-5" aria-label="Research backing">
           <div className="container-lg flex flex-wrap items-center justify-center gap-6 text-white text-sm font-semibold opacity-90">
-            <span>Backed by research from:</span>
+            <span>{t.trust}</span>
             {['Mayo Clinic', 'Harvard Health', 'NIH'].map(s => (
               <span key={s} className="bg-white/20 rounded-full px-4 py-1.5">{s}</span>
             ))}
@@ -222,7 +216,7 @@ export default function Page() {
         <section id="problem" className="section-pad bg-white">
           <div className="container-lg">
             <div className="text-center mb-12">
-              <span className="section-label">Does This Sound Like You?</span>
+              <span className="section-label">{t.problem.label}</span>
               <div className="divider mx-auto mb-6" />
             </div>
             <div className="grid md:grid-cols-3 gap-6 mb-10">
@@ -237,7 +231,7 @@ export default function Page() {
               ))}
             </div>
             <p className="text-center text-xl text-forest font-serif italic">
-              "If any of this feels familiar — you are not alone. And it is not your fault."
+              {t.problem.quote}
             </p>
           </div>
         </section>
@@ -245,20 +239,19 @@ export default function Page() {
         {/* AGITATION */}
         <section className="section-pad gradient-sage-soft">
           <div className="container-md text-center">
-            <span className="section-label">Why Nothing Has Worked</span>
+            <span className="section-label">{t.agitation.label}</span>
             <h2 className="font-serif text-3xl md:text-4xl text-forest font-bold mb-6">
-              You&apos;ve tried apps. YouTube videos. Maybe even a book or two.
+              {t.agitation.h2}
             </h2>
             <p className="text-xl text-muted mb-4">
-              But at 2am, when your mind is spinning and sleep feels impossible — nothing helps.
+              {t.agitation.p1}
             </p>
             <p className="text-xl text-forest font-semibold">
-              Here&apos;s why: Most meditation tools were designed for 30-year-olds with busy schedules and tech-savvy habits.{' '}
-              <span className="text-sage">Not for you.</span>
+              {t.agitation.p2_1}
+              <span className="text-sage">{t.agitation.p2_2}</span>
             </p>
             <p className="text-lg text-muted mt-6">
-              The 60+ mind and body work differently. You need something simpler. Gentler.
-              Built for exactly where you are in life right now.
+              {t.agitation.p3}
             </p>
           </div>
         </section>
@@ -267,14 +260,13 @@ export default function Page() {
         <section id="method" className="section-pad bg-white">
           <div className="container-lg">
             <div className="text-center mb-12">
-              <span className="section-label">The Method</span>
+              <span className="section-label">{t.method.label}</span>
               <h2 className="font-serif text-3xl md:text-4xl text-forest font-bold mb-4">
-                Introducing: The 3-Breath Anchor Method
+                {t.method.title}
               </h2>
               <div className="divider mx-auto mb-6" />
               <p className="text-lg text-muted max-w-2xl mx-auto">
-                The only daily practice designed specifically for the 60+ nervous system —
-                which responds better to simple, repeatable rituals than constant novelty.
+                {t.method.desc}
               </p>
             </div>
             <div className="grid md:grid-cols-3 gap-6 mb-10">
@@ -288,13 +280,12 @@ export default function Page() {
                 </div>
               ))}
             </div>
-            {/* Method illustration */}
             <div className="relative w-full max-w-lg mx-auto h-48 mb-8 rounded-2xl overflow-hidden opacity-80">
-              <Image src="/images/method.png" alt="3-Breath Anchor Method illustration" fill className="object-contain" sizes="512px" />
+              <Image src="/images/method.png" alt="Method illustration" fill className="object-contain" sizes="512px" />
             </div>
             <p className="text-center text-xl font-serif font-semibold text-forest">
-              Three steps. Three minutes to learn. Works from{' '}
-              <span className="text-sage underline decoration-dotted">Night One.</span>
+              {t.method.footer1}
+              <span className="text-sage underline decoration-dotted">{t.method.footer2}</span>
             </p>
           </div>
         </section>
@@ -303,22 +294,21 @@ export default function Page() {
         <section id="included" className="section-pad gradient-amber-soft">
           <div className="container-lg">
             <div className="text-center mb-10">
-              <span className="section-label">What You Get</span>
+              <span className="section-label">{t.offer.label}</span>
               <h2 className="font-serif text-3xl md:text-4xl text-forest font-bold mb-2">
-                Here&apos;s Everything Included Today
+                {t.offer.title}
               </h2>
               <div className="divider mx-auto" />
             </div>
 
-            {/* Core */}
             <div className="card mb-4 border-2 border-sage">
               <div className="flex flex-col md:flex-row md:items-start gap-4">
                 <div className="flex-1">
-                  <span className="section-label !mb-1">Core Program</span>
-                  <h3 className="font-serif text-2xl font-bold text-forest mb-2">The Peaceful Mind Method</h3>
-                  <p className="text-muted mb-3">21 guided video sessions (10 min each) + 120-page companion book (PDF). Your complete 21-day journey to better sleep, less stress, and renewed joy.</p>
+                  <span className="section-label !mb-1">{t.offer.coreLabel}</span>
+                  <h3 className="font-serif text-2xl font-bold text-forest mb-2">{t.offer.coreTitle}</h3>
+                  <p className="text-muted mb-3">{t.offer.coreDesc}</p>
                   <ul className="space-y-1 text-sm text-forest">
-                    {['21 video sessions × 10 minutes', '120-page PDF companion book', 'Morning, evening & emergency calm practices'].map(i => (
+                    {t.offer.coreIncludes.map(i => (
                       <li key={i} className="flex items-center gap-2">
                         <svg className="w-4 h-4 text-sage flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 13l4 4L19 7" /></svg>
                         {i}
@@ -327,13 +317,12 @@ export default function Page() {
                   </ul>
                 </div>
                 <div className="text-right flex-shrink-0">
-                  <span className="text-muted line-through text-sm">Market value</span>
+                  <span className="text-muted line-through text-sm">{t.offer.marketValue}</span>
                   <p className="font-serif font-bold text-3xl text-sage">$147</p>
                 </div>
               </div>
             </div>
 
-            {/* Bonuses */}
             <div className="grid md:grid-cols-2 gap-4 mb-8">
               {bonuses.map(b => (
                 <div key={b.tag} className={`card border ${b.color}`}>
@@ -347,14 +336,13 @@ export default function Page() {
               ))}
             </div>
 
-            {/* Value summary */}
             <div className="card bg-sage text-white text-center border-0">
-              <p className="text-sage-100 mb-1">Total Value</p>
+              <p className="text-sage-100 mb-1">{t.offer.totalValue}</p>
               <p className="font-serif text-5xl font-bold mb-2">$241</p>
-              <p className="text-sage-100 text-lg mb-4">Your price today (launch week only)</p>
-              <p className="font-serif text-6xl font-bold mb-4">$1.85</p>
+              <p className="text-sage-100 text-lg mb-4">{t.offer.yourPrice}</p>
+              <p className="font-serif text-6xl font-bold mb-4">{t.prices.standard}</p>
               <a href="#lead-form" id="stack-cta" className="inline-flex items-center justify-center gap-2 bg-white text-sage font-sans font-bold rounded-2xl px-8 py-4 text-lg hover:bg-cream transition-colors cursor-pointer no-underline">
-                Get Everything for $1.85
+                {t.offer.getEverything} {t.prices.standard}
               </a>
             </div>
           </div>
@@ -364,23 +352,16 @@ export default function Page() {
         <section className="section-pad bg-white">
           <div className="container-lg">
             <div className="text-center mb-10">
-              <span className="section-label">Real Stories</span>
-              <h2 className="font-serif text-3xl font-bold text-forest">What Our Members Are Saying</h2>
+              <span className="section-label">{t.testimonials.label}</span>
+              <h2 className="font-serif text-3xl font-bold text-forest">{t.testimonials.title}</h2>
               <div className="divider mx-auto mt-4" />
             </div>
             <div className="grid md:grid-cols-3 gap-6">
               {testimonials.map(t => (
                 <div key={t.name} className="card hover:shadow-cta transition-shadow duration-200">
-                  {/* Avatar */}
                   <div className="flex items-center gap-3 mb-4">
                     <div className="relative w-14 h-14 rounded-full overflow-hidden flex-shrink-0 border-2 border-sage-100">
-                      <Image
-                        src={`/images/${t.name.split(',')[0].split(' ')[0].toLowerCase()}.png`}
-                        alt={t.name}
-                        fill
-                        className="object-cover object-top"
-                        sizes="56px"
-                      />
+                      <Image src={`/images/${t.imgName}.png`} alt={t.name} fill className="object-cover object-top" sizes="56px" />
                     </div>
                     <div>
                       <p className="font-semibold text-forest text-sm">{t.name}</p>
@@ -406,17 +387,16 @@ export default function Page() {
           <div className="container-md text-center">
             <div className="card max-w-2xl mx-auto border-2 border-sage">
               <div className="relative w-28 h-28 mx-auto mb-6">
-                <Image src="/images/guarantee.png" alt="90-Day Peace Promise badge" fill className="object-contain" sizes="112px" />
+                <Image src="/images/guarantee.png" alt="Guarantee badge" fill className="object-contain" sizes="112px" />
               </div>
-              <span className="section-label">Our Promise to You</span>
-              <h2 className="font-serif text-3xl font-bold text-forest mb-4">The 90-Day Peace Promise</h2>
+              <span className="section-label">{t.guarantee.label}</span>
+              <h2 className="font-serif text-3xl font-bold text-forest mb-4">{t.guarantee.title}</h2>
               <p className="text-lg text-muted leading-relaxed">
-                Try The Peaceful Mind Method for <strong className="text-forest">90 full days</strong>.
-                Do the 10-minute practice. If you don&apos;t sleep better, feel calmer, or find any value whatsoever —
-                email us for a <strong className="text-forest">full refund</strong>. No questions asked.{' '}
-                <strong className="text-sage">And you keep the book, all 21 videos, and every single bonus.</strong>
+                {t.guarantee.p1}<strong className="text-forest">{t.guarantee.p2}</strong>{t.guarantee.p3}
+                <strong className="text-forest">{t.guarantee.p4}</strong>{t.guarantee.p5}
+                <strong className="text-sage">{t.guarantee.p6}</strong>
               </p>
-              <p className="text-forest font-semibold mt-4">That&apos;s how certain we are this works for you.</p>
+              <p className="text-forest font-semibold mt-4">{t.guarantee.footer}</p>
             </div>
           </div>
         </section>
@@ -425,50 +405,41 @@ export default function Page() {
         <section id="pricing" className="section-pad bg-white">
           <div className="container-lg">
             <div className="text-center mb-10">
-              <span className="section-label">Choose Your Path</span>
+              <span className="section-label">{t.pricing.label}</span>
               <h2 className="font-serif text-3xl md:text-4xl font-bold text-forest mb-2">
-                Start Your Journey Today
+                {t.pricing.title}
               </h2>
-              <p className="text-muted">Launch price ends soon — choose the plan that&apos;s right for you</p>
+              <p className="text-muted">{t.pricing.desc}</p>
               <div className="divider mx-auto mt-4" />
             </div>
             <div className="grid md:grid-cols-3 gap-6 mb-12">
-              {tiers.map(t => (
-                <div
-                  key={t.id}
-                  className={`card relative flex flex-col ${t.recommended ? 'border-2 border-sage shadow-cta scale-[1.02]' : 'border border-cream-300'}`}
-                >
-                  {t.recommended && (
+              {tiers.map(tData => (
+                <div key={tData.id} className={`card relative flex flex-col ${tData.recommended ? 'border-2 border-sage shadow-cta scale-[1.02]' : 'border border-cream-300'}`}>
+                  {tData.recommended && (
                     <div className="absolute -top-4 left-1/2 -translate-x-1/2">
                       <span className="bg-sage text-white text-xs font-bold px-4 py-1.5 rounded-full uppercase tracking-wide">
-                        {t.sublabel}
+                        {tData.sublabel}
                       </span>
                     </div>
                   )}
-                  <h3 className="font-serif text-xl font-bold text-forest mb-1">{t.label}</h3>
+                  <h3 className="font-serif text-xl font-bold text-forest mb-1">{tData.label}</h3>
                   <div className="flex items-baseline gap-2 mb-1">
-                    <span className="font-serif text-4xl font-bold text-sage">{t.price}</span>
-                    {t.originalPrice && (
-                      <span className="text-muted line-through text-lg">{t.originalPrice}</span>
+                    <span className="font-serif text-4xl font-bold text-sage">{tData.price}</span>
+                    {tData.originalPrice && (
+                      <span className="text-muted line-through text-lg">{tData.originalPrice}</span>
                     )}
                   </div>
-                  <p className="text-sm text-muted mb-4">{t.note}</p>
+                  <p className="text-sm text-muted mb-4">{tData.note}</p>
                   <ul className="space-y-2 mb-6 flex-1">
-                    {t.includes.map(i => (
+                    {tData.includes.map(i => (
                       <li key={i} className="flex items-start gap-2 text-sm text-forest">
-                        <svg className="w-4 h-4 text-sage flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 13l4 4L19 7" />
-                        </svg>
+                        <svg className="w-4 h-4 text-sage flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 13l4 4L19 7" /></svg>
                         {i}
                       </li>
                     ))}
                   </ul>
-                  <a
-                    href="#lead-form"
-                    id={`pricing-cta-${t.id}`}
-                    className={`${t.recommended ? 'btn-primary' : 'btn-secondary'} text-center no-underline`}
-                  >
-                    Choose {t.label}
+                  <a href="#lead-form" id={`pricing-cta-${tData.id}`} className={`${tData.recommended ? 'btn-primary' : 'btn-secondary'} text-center no-underline`}>
+                    {t.pricing.chooseBtn} {tData.label}
                   </a>
                 </div>
               ))}
@@ -476,8 +447,8 @@ export default function Page() {
 
             {/* Lead Form */}
             <div id="lead-form" className="card max-w-md mx-auto border-2 border-sage">
-              <h3 className="font-serif text-2xl font-bold text-forest mb-2 text-center">Get Instant Access</h3>
-              <p className="text-muted text-center text-sm mb-6">Enter your details below to receive the Full Bundle</p>
+              <h3 className="font-serif text-2xl font-bold text-forest mb-2 text-center">{t.pricing.formTitle}</h3>
+              <p className="text-muted text-center text-sm mb-6">{t.pricing.formDesc}</p>
               <LeadForm tier="standard" />
             </div>
           </div>
@@ -486,17 +457,16 @@ export default function Page() {
         {/* URGENCY */}
         <section className="section-pad bg-amber-50 border-t border-b border-amber-100">
           <div className="container-md text-center">
-            <span className="section-label text-amber-600">Limited Time</span>
+            <span className="section-label text-amber-600">{t.urgency.label}</span>
             <h2 className="font-serif text-2xl md:text-3xl font-bold text-forest mb-4">
-              This launch price disappears soon
+              {t.urgency.title}
             </h2>
             <p className="text-lg text-muted mb-6">
-              The Full Bundle returns to <strong className="text-forest">$27</strong> after launch week ends.
-              The &ldquo;Start Tonight&rdquo; checklist (Bonus F) expires{' '}
-              <strong className="text-forest">48 hours after purchase.</strong>
+              {t.urgency.p1}<strong className="text-forest">{t.urgency.p2}</strong>{t.urgency.p3}
+              <strong className="text-forest">{t.urgency.p4}</strong>
             </p>
             <a href="#lead-form" id="urgency-cta" className="btn-primary no-underline inline-flex">
-              Lock In $1.85 Now
+              {t.urgency.cta} — {t.prices.standard}
             </a>
           </div>
         </section>
@@ -505,8 +475,8 @@ export default function Page() {
         <section id="faq" className="section-pad bg-white">
           <div className="container-md">
             <div className="text-center mb-10">
-              <span className="section-label">Questions & Answers</span>
-              <h2 className="font-serif text-3xl font-bold text-forest">Everything You Need to Know</h2>
+              <span className="section-label">{t.faq.label}</span>
+              <h2 className="font-serif text-3xl font-bold text-forest">{t.faq.title}</h2>
               <div className="divider mx-auto mt-4" />
             </div>
             <FAQAccordion />
@@ -517,33 +487,33 @@ export default function Page() {
         <section className="section-pad gradient-sage-soft text-center">
           <div className="container-md">
             <h2 className="font-serif text-3xl md:text-4xl font-bold text-forest mb-4">
-              You deserve to sleep through the night.
+              {t.finalCta.title}
             </h2>
             <p className="text-xl text-muted mb-8 max-w-xl mx-auto">
-              10 minutes a day. 21 days. The rest of your life, changed.
+              {t.finalCta.desc}
             </p>
             <a href="#lead-form" id="final-cta" className="btn-primary text-xl no-underline inline-flex">
-              Get Instant Access — $1.85
+              {t.nav.cta} — {t.prices.standard}
             </a>
-            <p className="text-muted text-sm mt-4">Instant delivery · 90-Day Peace Promise · $241 value</p>
+            <p className="text-muted text-sm mt-4">{t.finalCta.footer}</p>
           </div>
         </section>
 
         {/* FOOTER */}
         <footer className="bg-forest text-white py-10 px-5 text-center">
-          <p className="font-serif text-xl font-semibold mb-2">The Peaceful Mind Method</p>
-          <p className="text-sage-200 text-sm mb-4">Calm Your Mind. Sleep Better. Feel Alive Again.</p>
+          <p className="font-serif text-xl font-semibold mb-2">{t.footer.title}</p>
+          <p className="text-sage-200 text-sm mb-4">{t.footer.subtitle}</p>
           <p className="text-sage-300 text-xs">
-            © <span suppressHydrationWarning>{new Date().getFullYear()}</span> The Peaceful Mind Method. All rights reserved.
+            © <span suppressHydrationWarning>{new Date().getFullYear()}</span> {t.footer.title}. {t.footer.rights}
             <span className="mx-2">·</span>
-            Questions? Email us anytime.
+            {t.footer.questions}
           </p>
           <p className="text-sage-400 text-xs mt-2">
-            Results may vary. This product is for educational and wellness purposes only and is not a substitute for medical advice.
+            {t.footer.disclaimer}
           </p>
         </footer>
 
       </main>
     </>
-  )
+  );
 }

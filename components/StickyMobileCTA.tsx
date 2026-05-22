@@ -1,10 +1,10 @@
 'use client'
 import { useEffect, useState } from 'react'
-
-import ClientDynamicPrice from './ClientDynamicPrice'
+import { useLanguage } from '@/components/LanguageProvider'
 
 export default function StickyMobileCTA() {
   const [visible, setVisible] = useState(false)
+  const { t } = useLanguage()
 
   useEffect(() => {
     const onScroll = () => setVisible(window.scrollY > 600)
@@ -25,9 +25,9 @@ export default function StickyMobileCTA() {
         id="sticky-mobile-cta"
         className="btn-primary w-full shadow-lg shadow-sage/30 flex items-center justify-center py-3.5 text-[15px]"
       >
-        <ClientDynamicPrice enPrice="$1.85" viPrice="50,000đ" textEn="Get Access Now" textVi="Truy Cập Ngay" />
+        {t.nav.cta} — {t.prices.standard}
       </a>
-      <p className="text-center text-xs text-muted mt-1">90-Day Peace Promise · $241 Value</p>
+      <p className="text-center text-xs text-muted mt-1">{t.finalCta.footer}</p>
     </div>
   )
 }
