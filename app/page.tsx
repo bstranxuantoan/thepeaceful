@@ -108,7 +108,7 @@ const tiers = [
   {
     id: 'basic',
     label: 'Book Only',
-    price: '$9.97',
+    price: '269.000đ',
     includes: ['120-page companion book (PDF)'],
     recommended: false,
     note: 'No guided video sessions',
@@ -117,8 +117,8 @@ const tiers = [
     id: 'standard',
     label: 'Full Bundle',
     sublabel: 'BEST VALUE',
-    price: '$14.97',
-    originalPrice: '$27',
+    price: '404.000đ',
+    originalPrice: '729.000đ',
     includes: [
       'Book + 21 Video Sessions (10 min each)',
       'Tonight\'s Sleep Emergency Session',
@@ -127,12 +127,12 @@ const tiers = [
       'Start Tonight Checklist (48h only)',
     ],
     recommended: true,
-    note: '$241 total value',
+    note: 'Tổng giá trị hơn 6.500.000đ',
   },
   {
     id: 'premium',
     label: 'Premium + Support',
-    price: '$37',
+    price: '999.000đ',
     includes: [
       'Everything in Full Bundle',
       '30-Day Personal Email Support',
@@ -463,7 +463,7 @@ export default function Page() {
                     ))}
                   </ul>
                   <a
-                    href={`#lead-form-${t.id}`}
+                    href="#lead-form"
                     id={`pricing-cta-${t.id}`}
                     className={`${t.recommended ? 'btn-primary' : 'btn-secondary'} text-center no-underline`}
                   >
@@ -474,7 +474,7 @@ export default function Page() {
             </div>
 
             {/* Lead Form */}
-            <div id="lead-form-standard" className="card max-w-md mx-auto border-2 border-sage">
+            <div id="lead-form" className="card max-w-md mx-auto border-2 border-sage">
               <h3 className="font-serif text-2xl font-bold text-forest mb-2 text-center">Get Instant Access</h3>
               <p className="text-muted text-center text-sm mb-6">Enter your details below to receive the Full Bundle</p>
               <LeadForm tier="standard" />
@@ -490,12 +490,12 @@ export default function Page() {
               This launch price disappears soon
             </h2>
             <p className="text-lg text-muted mb-6">
-              The Full Bundle returns to <strong className="text-forest">$27</strong> after launch week ends.
+              The Full Bundle returns to <strong className="text-forest">729.000đ</strong> after launch week ends.
               The &ldquo;Start Tonight&rdquo; checklist (Bonus F) expires{' '}
               <strong className="text-forest">48 hours after purchase.</strong>
             </p>
-            <a href="#lead-form-standard" id="urgency-cta" className="btn-primary no-underline inline-flex">
-              Lock In $14.97 Now
+            <a href="#lead-form" id="urgency-cta" className="btn-primary no-underline inline-flex">
+              Lock In 404.000đ Now
             </a>
           </div>
         </section>

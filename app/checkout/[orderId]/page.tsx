@@ -14,9 +14,9 @@ export default async function CheckoutPage({ params }: { params: Promise<{ order
   
   if (!lead) notFound();
 
-  const bank = process.env.SEPAY_BANK_NAME || 'Vietcombank';
-  const accountNumber = process.env.SEPAY_BANK_ACCOUNT_NUMBER || '1234567890';
-  const accountName = process.env.SEPAY_ACCOUNT_NAME || 'NGUYEN VAN A';
+  const bank = process.env.SEPAY_BANK_NAME || 'MBBank';
+  const accountNumber = process.env.SEPAY_BANK_ACCOUNT_NUMBER || '8888693368';
+  const accountName = process.env.SEPAY_ACCOUNT_NAME || 'TRAN XUAN TOAN';
   
   const qrUrl = buildSepayQrUrl({
     accountNumber,

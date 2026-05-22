@@ -1,25 +1,25 @@
 'use client'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 
 const TIER_MAPPING: Record<string, { productName: string; amount: number; priceLabel: string; label: string }> = {
   basic: {
     productName: 'The Peaceful Mind Method - Book Only',
-    amount: 99000,
-    priceLabel: '99.000đ',
-    label: 'Gói Sách Đọc (Book Only) — 99.000đ',
+    amount: 269000,
+    priceLabel: '269.000đ',
+    label: 'Gói Sách Đọc (Book Only) — 269.000đ',
   },
   standard: {
     productName: 'The Peaceful Mind Method - Full Bundle',
-    amount: 149700,
-    priceLabel: '149.700đ',
-    label: 'Gói Đầy Đủ (Full Bundle) — 149.700đ',
+    amount: 404000,
+    priceLabel: '404.000đ',
+    label: 'Gói Đầy Đủ (Full Bundle) — 404.000đ',
   },
   premium: {
     productName: 'The Peaceful Mind Method - Premium + Support',
-    amount: 370000,
-    priceLabel: '370.000đ',
-    label: 'Gói Cao Cấp (Premium + Support) — 370.000đ',
+    amount: 999000,
+    priceLabel: '999.000đ',
+    label: 'Gói Cao Cấp (Premium + Support) — 999.000đ',
   },
 }
 
@@ -28,6 +28,20 @@ export default function LeadForm({ tier: initialTier }: { tier: string }) {
   const [form, setForm] = useState({ name: '', email: '', phone: '' })
   const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle')
   const router = useRouter()
+
+  useEffect(() => {
+    const handleClick = (e: MouseEvent) => {
+      const target = (e.target as HTMLElement).closest('a');
+      if (target && target.id.startsWith('pricing-cta-')) {
+        const tier = target.id.replace('pricing-cta-', '');
+        if (TIER_MAPPING[tier]) {
+          setSelectedTier(tier);
+        }
+      }
+    };
+    document.addEventListener('click', handleClick);
+    return () => document.removeEventListener('click', handleClick);
+  }, []);
 
   const tierInfo = TIER_MAPPING[selectedTier] || TIER_MAPPING.standard
 
