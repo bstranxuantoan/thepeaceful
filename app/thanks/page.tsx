@@ -70,17 +70,38 @@ export default async function ThanksPage({ searchParams }: Props) {
           </div>
         )}
 
-        <div className="p-4 rounded-xl bg-amber-50/70 border border-amber-200/50 text-xs text-amber-800 leading-relaxed mb-6">
-          📧 <strong>Kiểm tra hộp thư:</strong> Hướng dẫn tham gia khoá học đã được gửi tự động tới địa chỉ email của bạn. Vui lòng kiểm tra cả thư mục Spam/Quảng cáo nếu chưa nhận được.
-        </div>
+        <div className="p-5 rounded-2xl bg-[#E8F2FF] border border-[#0068FF]/20 text-center mb-6">
+          <h3 className="font-bold text-[#0068FF] mb-2">Bước cuối cùng: Tham gia Nhóm Zalo</h3>
+          <p className="text-sm text-gray-700 mb-4 leading-relaxed">
+            Mọi tài liệu, hướng dẫn và hỗ trợ trực tiếp sẽ được gửi qua nhóm Zalo kín dành riêng cho học viên.
+          </p>
+          
+          <div className="flex justify-center mb-4">
+            <div className="p-2 bg-white rounded-xl border border-gray-200">
+              <img 
+                src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https://zalo.me/g/tfjys46kkhw79hbslpxm" 
+                alt="Zalo Group QR Code" 
+                width={160} 
+                height={160}
+                className="w-40 h-40 object-contain"
+              />
+            </div>
+          </div>
+          
+          <p className="text-xs text-gray-500 mb-4">Quét mã QR bằng ứng dụng Zalo hoặc bấm nút dưới đây</p>
 
-        <Link
-          href="/"
-          className="btn-primary w-full no-underline block py-3.5 text-center text-base"
-        >
-          Quay lại Trang Chủ
-        </Link>
-      </div>
+          <a
+            href="https://zalo.me/g/tfjys46kkhw79hbslpxm"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center justify-center gap-2 w-full bg-[#0068FF] hover:bg-[#0054cc] text-white font-bold py-3.5 px-4 rounded-xl transition-colors no-underline text-base"
+          >
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M21.168 7.332c-1.396-4.528-6.906-5.836-10.748-4.708-5.32 1.564-7.514 7.646-4.832 12.392.516.91.56 1.946.12 2.894l-1.076 2.32a1.083 1.083 0 001.378 1.436l2.42-1.002c.896-.372 1.902-.378 2.802-.016 4.706 1.888 10.366-1.156 11.458-6.198.814-3.766-.522-6.666-1.522-7.118z" fill="currentColor"/>
+            </svg>
+            Tham gia Nhóm Zalo ngay
+          </a>
+        </div>
 
       <div className="mt-6 text-center text-xs text-muted">
         © {new Date().getFullYear()} The Peaceful Mind Method. All rights reserved.

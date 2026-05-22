@@ -156,10 +156,57 @@ async function runSideEffects(lead: Lead, payload: SepayWebhookPayload): Promise
   // KHÔNG dùng Promise.all (1 reject block tất cả).
   
   const operations: Array<{ name: string; fn: () => Promise<unknown> }> = [
-    // Ở đây sẽ tích hợp gửi email hoặc thông báo telegram ở các bước sau.
-  ];
+    {
+      name: 'send-welcome-email',
+      fn: async () => {
+        const resendApiKey = process.env.RESEND_API_KEY;
+        const fromEmail = process.env.RESEND_FROM_EMAIL || 'The Peaceful Mind Method <hello@quietmindful.com>';
+        
+        if (!resendApiKey) {
+          console.warn('[sepay-webhook] RESEND_API_KEY is not set, skipping email.');
+          return;
+        }
+        
+        const res = await fetch('https://api.resend.com/emails', {
+          method: 'POST',
+          headers: {
+            'Authorization': `Bearer ${resendApiKey}`,
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            from: fromEmail,
+            to: lead.email,
+            subject: 'Xác nhận thanh toán thành công & Hướng dẫn nhận tài liệu',
+            html: `
+              <div style="font-family: sans-serif; max-width: 600px; margin: 0 auto; color: #333; line-height: 1.6;">
+                <h2 style="color: #2F5233;">Cảm ơn bạn đã đăng ký The Peaceful Mind Method!</h2>
+                <p>Chào <strong>${lead.name}</strong>,</p>
+                <p>Hệ thống đã xác nhận nhận được khoản thanh toán <strong>${lead.amount.toLocaleString('vi-VN')}đ</strong> cho đơn hàng <strong>${lead.orderId}</strong> của bạn.</p>
+                
+                <div style="background-color: #E8F2FF; padding: 20px; border-radius: 8px; margin: 24px 0; border: 1px solid #B0D0FF;">
+                  <h3 style="margin-top: 0; color: #0068FF;">Bước tiếp theo quan trọng:</h3>
+                  <p>Tất cả tài liệu (Ebook, Audio, Video), hướng dẫn chi tiết và sự hỗ trợ sẽ được chia sẻ qua <strong>nhóm Zalo kín dành riêng cho học viên</strong>.</p>
+                  <p style="margin-bottom: 20px;"><strong>Vui lòng tham gia nhóm ngay bây giờ:</strong></p>
+                  <a href="https://zalo.me/g/tfjys46kkhw79hbslpxm" style="display: inline-block; background-color: #0068FF; color: white; text-decoration: none; padding: 12px 24px; border-radius: 6px; font-weight: bold; text-align: center;">Tham gia Nhóm Zalo</a>
+                </div>
+                
+                <p>Nếu bạn gặp bất kỳ vấn đề gì hoặc không thể tham gia nhóm, hãy phản hồi lại email này để được hỗ trợ nhé.</p>
+                <p>Chúc bạn sẽ sớm tìm lại được những giấc ngủ ngon và bình yên.</p>
+                <br/>
+                <p>Trân trọng,</p>
+                <p><strong>The Peaceful Mind Method Team</strong></p>
+              </div>
+            `
+          })
+        });
 
-  for (const op of operations) {
+        if (!res.ok) {
+          const errData = await res.text();
+          throw new Error(`Resend API error: ${res.status} ${errData}`);
+        }
+      }
+    }
+  ];
     try {
       await op.fn();
       console.log(`[sepay-webhook] ✓ ${op.name} done`);
