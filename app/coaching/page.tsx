@@ -6,15 +6,15 @@ import Image from 'next/image'
 type Msg = { role: 'user' | 'assistant'; content: string }
 
 const SUGGESTIONS = [
-  "Tôi hay bị tỉnh giấc lúc 2h-3h sáng",
-  "Tôi trằn trọc mãi không ngủ được",
-  "Tôi ngủ được nhưng sáng dậy rất mệt mỏi",
-  "Tôi bị căng thẳng và hay suy nghĩ nhiều",
+  "Cháu nhắc lại cho bác Từ Mỏ Neo là gì nhé?",
+  "Bác mở Video Số 1 ở đâu nhỉ?",
+  "Đêm qua bác tập nhưng vẫn chưa ngủ được cháu ạ",
+  "Bác đã sẵn sàng cho buổi tập tối nay!",
 ]
 
 export default function CoachingPage() {
   const [messages, setMessages] = useState<Msg[]>([
-    { role: 'assistant', content: 'Dạ cháu chào bác! Cháu là Trợ lý Giấc ngủ của Phương pháp Tâm Trí Bình An. Dạo này giấc ngủ của bác có vấn đề gì làm bác trăn trở không ạ?' }
+    { role: 'assistant', content: 'Dạ cháu chào bác! Chúc mừng bác đã sở hữu Phương Pháp Tâm Trí Bình An. Đêm nay là đêm đầu tiên, bác đã sẵn sàng chọn cho mình một "Từ Mỏ Neo" chưa ạ?' }
   ])
   const [input, setInput] = useState('')
   const [streaming, setStreaming] = useState(false)
@@ -82,10 +82,6 @@ export default function CoachingPage() {
     }
   }
 
-  // Auto-suggest email form if the assistant asks for it (heuristic)
-  const lastMsg = messages[messages.length - 1]
-  const showEmailForm = lastMsg?.role === 'assistant' && !streaming && (lastMsg.content.includes('Email') || lastMsg.content.includes('Đăng Ký'))
-
   return (
     <div className="flex flex-col h-screen bg-cream font-sans">
       {/* Header */}
@@ -140,20 +136,6 @@ export default function CoachingPage() {
             </div>
           )}
 
-          {/* Upsell Form Injection */}
-          {showEmailForm && (
-            <div className="flex justify-start animate-fade-in mt-4">
-              <div className="max-w-[85%] bg-amber-50 border-2 border-amber-200 rounded-2xl p-5 shadow-md">
-                <h3 className="font-serif text-xl font-bold text-forest mb-2">Nhận Phác Đồ Cá Nhân Hóa</h3>
-                <p className="text-muted mb-4">Để lại thông tin để cháu gửi chi tiết Phương pháp Mỏ Neo 3 Nhịp Thở qua email cho bác ạ.</p>
-                <div className="space-y-3">
-                  <input type="text" placeholder="Tên của bác là..." className="w-full px-4 py-3 rounded-xl border border-amber-200 text-lg focus:outline-none focus:ring-2 focus:ring-amber-400" />
-                  <input type="email" placeholder="Email của bác..." className="w-full px-4 py-3 rounded-xl border border-amber-200 text-lg focus:outline-none focus:ring-2 focus:ring-amber-400" />
-                  <a href="/#pricing" className="btn-primary w-full block text-center py-4 text-xl mt-2 rounded-xl">Nhận Phác Đồ Ngay</a>
-                </div>
-              </div>
-            </div>
-          )}
         </div>
       </main>
 

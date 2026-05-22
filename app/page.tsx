@@ -172,9 +172,14 @@ export default function Page() {
                 <p className="text-xl text-muted mb-8 text-balance">
                   {t.hero.desc}
                 </p>
-                <a href="#lead-form" id="hero-cta" className="btn-primary text-xl mb-4 no-underline inline-flex">
-                  {t.hero.cta} — {t.prices.standard}
-                </a>
+                <div className="flex flex-col sm:flex-row gap-4 mb-4">
+                  <a href="#lead-form" id="hero-cta" className="btn-primary text-xl no-underline inline-flex items-center justify-center">
+                    {t.hero.cta} — {t.prices.standard}
+                  </a>
+                  <a href="/khao-sat" className="btn-secondary text-xl no-underline inline-flex items-center justify-center border-2 border-sage text-sage hover:bg-sage-50 bg-white">
+                    Khám Bệnh (2 Phút)
+                  </a>
+                </div>
                 <p className="text-muted text-sm mb-6">{t.hero.value}</p>
                 <div className="flex flex-wrap gap-3 text-sm text-forest font-semibold">
                   {t.hero.tags.map(tag => (
