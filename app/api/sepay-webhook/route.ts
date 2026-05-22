@@ -207,6 +207,8 @@ async function runSideEffects(lead: Lead, payload: SepayWebhookPayload): Promise
       }
     }
   ];
+
+  for (const op of operations) {
     try {
       await op.fn();
       console.log(`[sepay-webhook] ✓ ${op.name} done`);
