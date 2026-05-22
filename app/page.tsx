@@ -1,3 +1,4 @@
+import Image from 'next/image'
 import LeadForm from '@/components/LeadForm'
 import FAQAccordion from '@/components/FAQAccordion'
 import StickyMobileCTA from '@/components/StickyMobileCTA'
